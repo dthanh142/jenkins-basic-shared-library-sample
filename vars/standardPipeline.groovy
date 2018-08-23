@@ -8,6 +8,12 @@ def call(body) {
 	    // Clean workspace before doing anything
 	    deleteDir()
 
+		// Read yaml config
+		echo 'Loading pipeline definition'
+        Yaml parser = new Yaml()
+        Map pipelineDefinition = parser.load(new File(pwd() + '/devops.yaml').text)
+		print pipelineDefinition
+
 	    try {
 	        stage ('Clone') {
 	        	checkout scm
