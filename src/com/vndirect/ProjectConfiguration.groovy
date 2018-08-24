@@ -2,7 +2,7 @@ package com.vndirect;
 
 import com.vndirect.*;
 
-class ProjectConfig {
+class ProjectConfiguration {
     def environment;
     // def services;
     // Steps steps;
