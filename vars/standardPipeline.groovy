@@ -18,11 +18,6 @@ def call(body) {
 	        	checkout scm
 	        }
 
-			echo 'Loading pipeline definition'
-        	Yaml parser = new Yaml()
-  	  	    Map pipelineDefinition = parser.load(new File(pwd() + '/devops.yaml').text)
-			print pipelineDefinition
-
 	        stage ('Build') {
 	        	sh "echo 'building ${config.projectName} ...'"
 	        }
