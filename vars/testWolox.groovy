@@ -10,7 +10,7 @@ def call() {
     // yaml = configParser
     
     // echo "${yaml}"
-    def yaml = readYaml file: ./devops.yaml;
+    def yaml = readYaml file: "./devops.yaml";
     echo "${yaml}"
     def buildNumber = Integer.parseInt(env.BUILD_ID)
 
