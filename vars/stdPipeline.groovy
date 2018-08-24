@@ -31,8 +31,8 @@ def call() {
 	      	stage('Deploy') {
 	            sh "echo 'deploying to server ${cp.template}...'"
 	      	}
-            stage('Call other steps') {
-                test2(cp.name)
+            stage('Approval') {
+                approval(cp.name)
             }
 
 	    } catch (err) {
