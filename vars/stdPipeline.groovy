@@ -14,18 +14,18 @@ def call() {
 		        cp = configParser
 		        echo "${cp}"
     	    }
-            stage('Approval') {
-                approval(cp.name)
-            }
+            // stage('Approval') {
+            //     approval(cp.name)
+            // }
 			stage('Build') {
 				echo "Building commit..."
 			}
-			switch(cp.template) {
-				case python:
-					stage('Build python'){
+			stage('Build python'){
+				switch(cp.template) {
+					case python:
 						echo "Building python"
-					}
-				break
+					break
+				}
 			}
 
 	    } catch (err) {
