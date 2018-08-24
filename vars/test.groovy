@@ -4,20 +4,20 @@ def call() {
 
     node {
 	    try {
-            stage ('Clone') {
+            stage('Clone') {
 	        	checkout scm
 	        }
-            stage ('Parse Yaml') {
+            stage('Parse Yaml') {
       		    echo 'Loading pipeline definition'
 		        Yaml parser = new Yaml()
 		        Map configParser = parser.load(new File(pwd() + '/devops.yaml').text)
 		        cp = configParser
 		        echo "${cp}"
     	    }
-	        stage ('Build') {
+	        stage('Build') {
 	        	sh "echo 'building ${cp.name} ...'"
 	        }
-	        stage ('Tests') {
+	        stage('Tests') {
 		        parallel 'static': {
 		            sh "echo 'shell scripts to run static tests...'"
 		        },
@@ -28,9 +28,12 @@ def call() {
 		            sh "echo 'shell scripts to run integration tests...'"
 		        }
 	        }
-	      	stage ('Deploy') {
+	      	stage('Deploy') {
 	            sh "echo 'deploying to server ${cp.template}...'"
 	      	}
+            stage('Call other steps') {
+                test2(cp.name)
+            }
 
 	    } catch (err) {
 	        currentBuild.result = 'FAILED'
