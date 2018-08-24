@@ -7,33 +7,24 @@ def call() {
             stage('Clone') {
 	        	checkout scm
 	        }
-            stage('Parse Yaml') {
+            stage('Parse config file') {
       		    echo 'Loading pipeline definition'
 		        Yaml parser = new Yaml()
 		        Map configParser = parser.load(new File(pwd() + '/devops.yaml').text)
 		        cp = configParser
 		        echo "${cp}"
     	    }
-	        stage('Build') {
-	        	sh "echo 'building ${cp.name} ...'"
-	        }
-	        stage('Tests') {
-		        parallel 'static': {
-		            sh "echo 'shell scripts to run static tests...'"
-		        },
-		        'unit': {
-		            sh "echo 'shell scripts to run unit tests...'"
-		        },
-		        'integration': {
-		            sh "echo 'shell scripts to run integration tests...'"
-		        }
-	        }
-	      	stage('Deploy') {
-	            sh "echo 'deploying to server ${cp.template}...'"
-	      	}
             stage('Approval') {
                 approval(cp.name)
             }
+			stage('Build') {
+				echo "Building commit..."
+			}
+			switch(cp.template) {
+				case python:
+					echo "Build python"
+				break
+			}
 
 	    } catch (err) {
 	        currentBuild.result = 'FAILED'
