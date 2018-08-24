@@ -13,7 +13,7 @@ class ConfigParser {
         projectConfiguration.environment    = parseEnvironment(yaml.template.language);
 
         // load the project name
-        projectConfiguration.projectName = parseProjectName(yaml.name);
+        projectConfiguration.projectName = parseProjectName(yaml);
 
         return projectConfiguration;
     }
