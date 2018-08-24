@@ -22,7 +22,9 @@ def call() {
 			}
 			switch(cp.template) {
 				case python:
-					echo "Build python"
+					stage('Build python'){
+						echo "Building python"
+					}
 				break
 			}
 
