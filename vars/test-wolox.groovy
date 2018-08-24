@@ -16,10 +16,10 @@ def call() {
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
 
-    stage('test'){
-        echo "${projectConfig.environment}"
-        echo "${projectConfig.projectName}"
-    }
+    // stage('test'){
+    //     echo "${projectConfig.environment}"
+    //     echo "${projectConfig.projectName}"
+    // }
     // build the image specified in the configuration
     // def customImage = docker.build("${projectConfig.projectName}:${env.BUILD_ID}", "--file ${projectConfig.dockerfile} .");
 
