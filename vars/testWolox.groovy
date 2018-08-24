@@ -9,6 +9,7 @@ def call() {
     Map configParser = parser.load(new File(pwd() + '/devops.yaml').text)
     yaml = configParser
     
+    echo "${yaml}"
     // def yaml = readYaml file: yamlName;
 
     def buildNumber = Integer.parseInt(env.BUILD_ID)
@@ -17,6 +18,6 @@ def call() {
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
 
     stage('test'){
-        echo "${projectConfig}"
+        echo projectConfig
     }
 }
