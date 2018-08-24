@@ -17,5 +17,5 @@ def call() {
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
 
-    echo "${projectConfig}"
+    print projectConfig.template
 }
