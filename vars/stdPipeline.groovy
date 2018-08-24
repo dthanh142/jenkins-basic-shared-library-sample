@@ -20,11 +20,14 @@ def call() {
 			stage('Build') {
 				echo "Building commit..."
 			}
-				switch(cp.template) {
-					case 'python':
-						echo "Building python"
-					break
-				}
+			switch(cp.template) {
+				case 'python':
+					echo "Building python"
+					python(cp.framework)
+				case 'java':
+					echo "Building java"
+				break
+			}
 			
 
 	    } catch (err) {
