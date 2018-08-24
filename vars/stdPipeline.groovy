@@ -20,7 +20,7 @@ def call() {
 			stage('Build') {
 				echo "Building commit..."
 			}
-			switch(cp.template) {
+			switch(cp.template.language) {
 				case 'python':
 					echo "Building python"
 					python(cp.template.framework)
