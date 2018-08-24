@@ -1,14 +1,21 @@
 import org.yaml.snakeyaml.Yaml
 
-def call(projectName,serverDomain) {
+def call() {
 
     node {
-	    // Clean workspace before doing anything
-	    deleteDir()
-
 	    try {
+            stage ('Clone') {
+	        	checkout scm
+	        }
+            stage ('Parse Yaml') {
+      		    echo 'Loading pipeline definition'
+		        Yaml parser = new Yaml()
+		        Map configParser = parser.load(new File(pwd() + '/devops.yaml').text)
+		        cp = configParser
+		        echo "${cp}"
+    	    }
 	        stage ('Build') {
-	        	sh "echo 'building ${projectName} ...'"
+	        	sh "echo 'building ${cp.name} ...'"
 	        }
 	        stage ('Tests') {
 		        parallel 'static': {
@@ -22,14 +29,13 @@ def call(projectName,serverDomain) {
 		        }
 	        }
 	      	stage ('Deploy') {
-	            sh "echo 'deploying to server ${serverDomain}...'"
+	            sh "echo 'deploying to server ${cp.template}...'"
 	      	}
+
 	    } catch (err) {
 	        currentBuild.result = 'FAILED'
 	        throw err
 	    }
     }
 }
-
-
 
