@@ -23,7 +23,7 @@ def call() {
 			switch(cp.template) {
 				case 'python':
 					echo "Building python"
-					python(cp.framework)
+					python(cp.template.framework)
 				case 'java':
 					echo "Building java"
 				break
