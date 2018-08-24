@@ -19,20 +19,19 @@ def call() {
             // }
 			stage('Build') {
 				echo "Building commit..."
+				switch(cp.template.language) {
+					case 'python':
+						echo "Building python"
+						python(cp.template.framework)
+						break
+					case 'java':
+						echo "Building java"
+						break
+					default:
+						echo "zip"
+						break
+				}
 			}
-			switch(cp.template.language) {
-				case 'python':
-					echo "Building python"
-					python(cp.template.framework)
-					break
-				case 'java':
-					echo "Building java"
-					break
-				default:
-					echo "zip"
-					break
-			}
-			
 
 	    } catch (err) {
 	        currentBuild.result = 'FAILED'
