@@ -24,9 +24,13 @@ def call() {
 				case 'python':
 					echo "Building python"
 					python(cp.template.framework)
+					break
 				case 'java':
 					echo "Building java"
-				break
+					break
+				default:
+					echo "zip"
+					break
 			}
 			
 
