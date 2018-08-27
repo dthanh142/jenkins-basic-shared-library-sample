@@ -13,8 +13,8 @@ def getTag() {
 
 def build(projectConfig) {
         echo 'Buidling commit...'
-        projectConfig.each {
-                println "${it}"
+        projectConfig.build.each {
+                sh "${it}"
         }
 
 }
