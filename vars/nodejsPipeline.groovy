@@ -9,8 +9,6 @@ def call(config) {
     // }
     stage("Build docker"){
 
-        def String command = String.join(",", ${config.runCommand})
-        sh "echo $command"
         // Write dockerfile
         writeFile file: 'Dockerfile', text: """FROM node:${config.version}
 WORKDIR /opt/${config.projectName}
