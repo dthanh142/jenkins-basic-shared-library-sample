@@ -5,7 +5,7 @@ def call(config) {
     echo "Building ${config.language}-${config.version}"
     stage("Build"){
         build(config)
-        env.getEnvironment()    
+        println env.getEnvironment()    
     }
     stage("Sonar"){
         sonar(config)
