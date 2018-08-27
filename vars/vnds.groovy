@@ -1,4 +1,5 @@
 #!/usr/bin/env groovy
+import com.vndirect.*;
 
 def getTag() {
 	echo 'Parsing tag...'
