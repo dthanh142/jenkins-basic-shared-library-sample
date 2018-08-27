@@ -6,9 +6,6 @@ def call(config) {
         case 'flask':
             echo "Building flasky"
             build(config)
-            // config.build.each{ command ->
-            //     vnds.build("${command}")
-            // }
             break
         case 'celery':
             echo "Building celery"
