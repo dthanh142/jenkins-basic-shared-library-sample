@@ -6,8 +6,8 @@ def call(config) {
         case 'flask':
             echo "Building flasky"
             println config.build
-            config.build.each{
-                build("${it}")
+            config.build.each{ command ->
+                build("${command}")
             }
             break
         case 'celery':

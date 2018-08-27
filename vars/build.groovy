@@ -1,5 +1,5 @@
 
-def call(step) {
+def call(command) {
     echo   'Building commit...'
-    sh '${step}'
+    sh '${command}'
 }
