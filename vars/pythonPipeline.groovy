@@ -1,12 +1,12 @@
 import com.vndirect.parser.ConfigParser;
 import com.vndirect.*;
 
-def call(projectConfig) {
-    switch(projectConfig.framework) {
+def call(config) {
+    switch(config.framework) {
         case 'flask':
             echo "Building flasky"
-            println projectConfig.build
-            vnds.build(projectConfig)
+            println config.build
+            vnds.build(config)
             break
         case 'celery':
             echo "Building celery"
