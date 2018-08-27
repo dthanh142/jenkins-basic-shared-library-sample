@@ -61,11 +61,11 @@ class ConfigParser {
     }
 
     static def parseVersion(def config) {
-        if (!config || !config["template"]["version"]) {
+        if (!config || !config["version"]) {
             return "default"
         }
         
-        return config["template"]["version"]
+        return config["version"]
     }
 
     static def parseFramework(def config) {
