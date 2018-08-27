@@ -4,7 +4,7 @@ def call(projectConfig) {
         case 'flask':
             echo "Building flasky"
             println projectConfig.build
-            vnds.build(projectConfig)
+            vnds.build("projectConfig")
             break
         case 'celery':
             echo "Building celery"
