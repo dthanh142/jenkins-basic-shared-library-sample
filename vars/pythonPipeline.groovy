@@ -5,10 +5,10 @@ def call(config) {
     switch(config.framework) {
         case 'flask':
             echo "Building flasky"
-            println config.build
-            config.build.each{ command ->
-                vnds.build("${command}")
-            }
+            vnds.build(config)
+            // config.build.each{ command ->
+            //     vnds.build("${command}")
+            // }
             break
         case 'celery':
             echo "Building celery"

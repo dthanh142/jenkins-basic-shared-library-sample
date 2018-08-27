@@ -11,8 +11,10 @@ def getTag() {
         println tag
 }
 
-def build(String command) {
-        sh command
+def build(config) {
+        config.build.each {
+                sh it
+        }
 
 }
 
