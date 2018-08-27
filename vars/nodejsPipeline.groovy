@@ -11,8 +11,7 @@ def call(config) {
     // }
     stage("Build docker"){
 
-        sh "echo $env.GIT_COMMIT"
-
+        println config.runCommand
         // Write dockerfile
         writeFile file: 'Dockerfile', text: """FROM node:${config.version}
 WORKDIR /opt/${config.projectName}
