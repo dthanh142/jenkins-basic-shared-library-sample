@@ -86,7 +86,7 @@ class ConfigParser {
     static def parsePort(def port) {
         if (!config) {
             return "no port"
-        }s
+        }
 
         return port
     }
