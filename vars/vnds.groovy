@@ -1,7 +1,7 @@
 #!/usr/bin/env groovy
 
-def build() {
-	echo 'Building commit...'
+def getTag() {
+	echo 'Parsing tag...'
         tag = sh(
             script: 'git branch',
             returnStdout: true
@@ -9,6 +9,14 @@ def build() {
 
         env.TAG = tag
         println tag
+}
+
+def build(projectConfig) {
+        echo 'Buidling commit...'
+        projectConfig.build.each {
+                sh "${ot}"
+        }
+
 }
 
 def sonar() {
