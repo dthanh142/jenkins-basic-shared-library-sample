@@ -9,7 +9,7 @@ def call(config) {
             // config.build.each{
             //     vnds.build("${it}")
             // }
-            vnds.build("npm i")
+            build("npm i")
             break
         case 'celery':
             echo "Building celery"
