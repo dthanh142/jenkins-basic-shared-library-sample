@@ -5,13 +5,12 @@ def call(config) {
     echo "Building ${config.language}-${config.version}"
     stage("Build"){
         build(config)
-        sh 'printenv'
     }
     stage("Sonar"){
         sonar(config)
     }
     stage("Build docker"){
-
+        sh 'print ${env.GIT_COMMIT}'
         // Write dockerfile
         writeFile file: 'Dockerfile', text: """FROM node:${config.version}
 WORKDIR /opt/${config.projectName}
@@ -21,6 +20,6 @@ RUN npm i -g pushstate-server
 EXPOSE ${config.port}
 CMD ["pushstate-server","build","9000"]"""
 
-        dockerBuild(config)
+        // dockerBuild(config)
     }
 }
