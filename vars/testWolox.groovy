@@ -17,6 +17,7 @@ def call() {
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
 
+    println projectConfig.template
     try {
             def firstImage = sh(
                 script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",
