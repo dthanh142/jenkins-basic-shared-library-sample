@@ -11,7 +11,7 @@ def call(config) {
 
         // def String command = String.join(",", config.runCommand)
 
-        println config.runCommand
+        // println config.runCommand
         def command = "${config.runCommand}".split(' ').collect { "\"" + it.trim() + "\"" }.join(",")
 
         // Write dockerfile
@@ -21,7 +21,7 @@ ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
 RUN npm i -g pushstate-server
 EXPOSE ${config.port}
-CMD [$command]"""
+CMD $command"""
 
         // dockerBuild(config)
     }
