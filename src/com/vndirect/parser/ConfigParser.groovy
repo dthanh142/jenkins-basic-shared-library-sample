@@ -27,10 +27,10 @@ class ConfigParser {
     }
 
     static def parseProjectName(def config) {
-        if (!config || !config["name"]) {
+        if (!config || !config["projectName"]) {
             return "woloxci-project";
         }
 
-        return config["name"];
+        return config["projectName"];
     }
 }
