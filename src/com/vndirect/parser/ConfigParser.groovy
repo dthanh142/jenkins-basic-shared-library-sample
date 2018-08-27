@@ -60,6 +60,9 @@ class ConfigParser {
     }
 
     static def parseBuildSteps(def config) {
+        // if (!config || !config['build']) {
+        //     return "No build"
+        // }
         return config.each {"$it"}
     }
 }

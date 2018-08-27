@@ -14,7 +14,7 @@ def getTag() {
 def build(projectConfig) {
         echo 'Buidling commit...'
         projectConfig.build.each {
-                sh "${ot}"
+                sh "${it}"
         }
 
 }
