@@ -9,4 +9,6 @@ class ProjectConfiguration {
     // def dockerfile;
     def projectName;
     def buildNumber;
+    def framework;
+    def language;
 }

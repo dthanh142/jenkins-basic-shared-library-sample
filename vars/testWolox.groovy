@@ -17,7 +17,15 @@ def call() {
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
 
-    println projectConfig.projectName
+    switch(projectConfig.language) {
+        case 'python':
+            pythonPipeline(projectConfig)
+            break
+        default: 
+            println "No framework declared"
+            break
+    }
+
     try {
             def firstImage = sh(
                 script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",

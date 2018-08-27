@@ -10,10 +10,16 @@ class ConfigParser {
         projectConfiguration.buildNumber = buildNumber;
 
         // parse the environment variables
-        projectConfiguration.environment    = parseEnvironment(yaml.template.language);
+        projectConfiguration.environment = parseEnvironment(yaml.template.language);
 
         // load the project name
         projectConfiguration.projectName = parseProjectName(yaml);
+
+        // load project framework
+        projectConfiguration.framework = parseFramework(yaml)
+
+        // load project language
+        projectConfiguration.language = parseLanguage(yaml)
 
         return projectConfiguration;
     }
@@ -32,5 +38,21 @@ class ConfigParser {
         }
 
         return config["projectName"];
+    }
+
+    static def parseLanguage(def config) {
+        if (!config || !config["template"]["language"]) {
+            return "vnds-language"
+        }
+
+        return config["template"]["language"]
+    }
+
+    static def parseFramework(def config) {
+        if (!config || !config["template"]["framework"]) {
+            return "vnds-framework"
+        }
+
+        return config["template"]["framework"]
     }
 }
