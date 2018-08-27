@@ -93,4 +93,5 @@ class ConfigParser {
 
     static def parseRunCommand(def runCommand) {
         return runCommand
+    }
 }
