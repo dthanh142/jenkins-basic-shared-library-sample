@@ -10,7 +10,7 @@ def call(config) {
         sonar(config)
     }
     stage("Build docker"){
-        sh "print ${env.GIT_COMMIT}"
+        sh "echo ${env.GIT_COMMIT}"
         // Write dockerfile
         writeFile file: 'Dockerfile', text: """FROM node:${config.version}
 WORKDIR /opt/${config.projectName}
