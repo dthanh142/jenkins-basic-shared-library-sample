@@ -2,8 +2,8 @@
 def call(projectConfig) {
     switch(projectConfig.framework) {
         case 'flask':
-            echo "Building flask"
-            println projectConfig.build
+            echo "Building flasky"
+            //println projectConfig.build
             // vnds.build(projectConfig)
             break
         case 'celery':
