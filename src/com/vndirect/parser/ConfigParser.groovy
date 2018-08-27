@@ -63,6 +63,6 @@ class ConfigParser {
         if (!config || !config['build']) {
             return "No build"
         }
-        return config.each {"$it"}
+        return config.each {println "$it"}
     }
 }
