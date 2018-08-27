@@ -12,8 +12,8 @@ def getTag() {
 }
 
 def build(ProjectConfiguration config) {
-        config.build.each {
-                sh it
+        config.build.each { command ->
+                sh command
         }
 
 }
