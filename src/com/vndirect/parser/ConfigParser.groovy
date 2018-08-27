@@ -53,7 +53,7 @@ class ConfigParser {
     }
 
     static def parseLanguage(def language) {
-        if (!config) {
+        if (!language) {
             return "vnds-language"
         }
 
@@ -61,7 +61,7 @@ class ConfigParser {
     }
 
     static def parseFramework(def framework) {
-        if (!config) {
+        if (!framework) {
             return "vnds-framework"
         }
 
@@ -69,7 +69,7 @@ class ConfigParser {
     }
 
     static def parseVersion(def version) {
-        if (!config) {
+        if (!version) {
             return "default"
         }
         
@@ -84,7 +84,7 @@ class ConfigParser {
     }
 
     static def parsePort(def port) {
-        if (!config) {
+        if (!port) {
             return "no port"
         }
 
