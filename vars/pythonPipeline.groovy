@@ -1,9 +1,10 @@
 
-def call(config) {
-    switch(config.framework) {
+def call(projectConfig) {
+    switch(projectConfig.framework) {
         case 'flask':
             echo "Building flask"
-            vnds.build()
+            println projectConfig.build
+            // vnds.build(projectConfig)
             break
         case 'celery':
             echo "Building celery"
