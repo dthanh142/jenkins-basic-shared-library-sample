@@ -16,7 +16,7 @@ def call() {
 
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
-    println env
+    print env
     
     switch(projectConfig.language) {
         case 'python':
