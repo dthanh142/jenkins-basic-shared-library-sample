@@ -14,7 +14,7 @@ def call() {
     println yaml
     def buildNumber = Integer.parseInt(env.BUILD_ID)
 
-    println yaml.Docker.runCommand.split().each
+    println yaml.Docker.runCommand.split().getClass()
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
     
