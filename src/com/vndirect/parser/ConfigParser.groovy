@@ -21,6 +21,9 @@ class ConfigParser {
         // load project language
         projectConfiguration.language = parseLanguage(yaml)
 
+        // load project build steps
+        projectConfiguration.build = parseBuildSteps(yaml.build)
+
         return projectConfiguration;
     }
 
@@ -54,5 +57,9 @@ class ConfigParser {
         }
 
         return config["template"]["framework"]
+    }
+
+    static def parseBuildSteps(def config) {
+        return config.each {$it}
     }
 }

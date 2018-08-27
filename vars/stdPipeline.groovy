@@ -3,6 +3,10 @@ import org.yaml.snakeyaml.Yaml
 def call() {
 
     node {
+		options {
+	    	buildDiscarder(logRotator(numToKeepStr: '5'))
+  		}
+
 	    try {
             stage('Clone') {
 	        	checkout scm
@@ -26,6 +30,10 @@ def call() {
 						break
 					case 'java':
 						echo "Building java"
+						break
+					case 'nodejs':
+						echo "Building nodejs project..."
+						java(cp.template.framework)
 						break
 					default:
 						echo "zip"

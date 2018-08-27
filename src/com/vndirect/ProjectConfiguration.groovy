@@ -11,4 +11,5 @@ class ProjectConfiguration {
     def buildNumber;
     def framework;
     def language;
+    def build;
 }

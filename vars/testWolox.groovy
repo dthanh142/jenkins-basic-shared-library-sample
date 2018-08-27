@@ -17,6 +17,7 @@ def call() {
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
 
+    println projectConfig.build
     switch(projectConfig.language) {
         case 'python':
             pythonPipeline(projectConfig)
@@ -26,21 +27,21 @@ def call() {
             break
     }
 
-    // try {
-    //         def firstImage = sh(
-    //             script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",
-    //             returnStdout: true
-    //         );
-    //         firstImage = Integer.parseInt(firstImage.trim());
-    //         println firstImage
-    //         for(int i = firstImage; i < buildNumber; i++) {
-    //             try {
-    //                 sh "docker images --filter 'reference=${projectConfig.projectName}:${i}' -q | xargs --no-run-if-empty docker rmi -f"
-    //             } catch(ignored) {
-    //                 println ignored
-    //             }
-    //         }
-    //     } catch(ignored) {
-    //         println ignored
-    //     }
+    try {
+            def firstImage = sh(
+                script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",
+                returnStdout: true
+            );
+            firstImage = Integer.parseInt(firstImage.trim());
+            println firstImage
+            for(int i = firstImage; i < buildNumber; i++) {
+                try {
+                    sh "docker images --filter 'reference=${projectConfig.projectName}:${i}' -q | xargs --no-run-if-empty docker rmi -f"
+                } catch(ignored) {
+                    println ignored
+                }
+            }
+        } catch(ignored) {
+            println ignored
+        }
 }
