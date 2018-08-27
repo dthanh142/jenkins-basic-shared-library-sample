@@ -5,7 +5,12 @@ def call(config) {
     switch(config.framework) {
         case 'flask':
             echo "Building flasky"
-            build(config)
+            stage("Build"){
+                build(config)
+            }
+            stage("Sonar"){
+                sonar(config)
+            }
             break
         case 'celery':
             echo "Building celery"

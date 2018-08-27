@@ -22,6 +22,12 @@ def call() {
         case 'python':
             pythonPipeline(projectConfig)
             break
+        case 'java':
+            javaPipeline(projectConfig)
+            break
+        case 'nodejs':
+            nodejsPipeline(projectConfig)
+            break
         default: 
             println "No framework declared"
             break
