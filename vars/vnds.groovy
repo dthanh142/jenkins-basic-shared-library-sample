@@ -11,7 +11,7 @@ def getTag() {
         println tag
 }
 
-def build(config) {
+def build(ProjectConfiguration config) {
         config.build.each {
                 sh it
         }
