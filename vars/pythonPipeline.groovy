@@ -7,7 +7,7 @@ def call(config) {
             echo "Building flasky"
             println config.build
             config.build.each{ command ->
-                build("${command}")
+                vnds.build("${command}")
             }
             break
         case 'celery':

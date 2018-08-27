@@ -11,9 +11,8 @@ def getTag() {
         println tag
 }
 
-def build(String step) {
-        echo 'Buidling commit...'
-        sh "${step}"
+def build(String command) {
+        sh command
 
 }
 
