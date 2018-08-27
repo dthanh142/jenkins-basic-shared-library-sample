@@ -21,8 +21,17 @@ class ConfigParser {
         // load project language
         projectConfiguration.language = parseLanguage(yaml)
 
+        // load version
+        projectConfiguration.version = parseVersion(yaml.template)
+
         // load project build steps
         projectConfiguration.build = parseBuildSteps(yaml.build)
+
+        // load project port
+        projectConfiguration.port = parsePort(yaml.Docker)
+
+        // load run command
+        projectConfiguration.runCommand = parseRunCommand(yaml.Docker)
 
         return projectConfiguration;
     }
@@ -51,6 +60,14 @@ class ConfigParser {
         return config["template"]["language"]
     }
 
+    static def parseVersion(def config) {
+        if (!config || !config["template"]["version"]) {
+            return "default"
+        }
+        
+        return config["template"]["version"]
+    }
+
     static def parseFramework(def config) {
         if (!config || !config["template"]["framework"]) {
             return "vnds-framework"
@@ -64,5 +81,17 @@ class ConfigParser {
         //     return "No build"
         // }
         return config.each {"$it"}
+    }
+
+    static def parsePort(def config) {
+        if (!config || !config["Docker"]["port"]) {
+            return "no port"
+        }
+
+        return config["Docker"]["port"]
+    }
+
+    static def parseRunCommand(def config) {
+        return true
     }
 }

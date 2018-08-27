@@ -3,13 +3,13 @@ package com.vndirect;
 import com.vndirect.*;
 
 class ProjectConfiguration {
-    def environment;
-    // def services;
-    // Steps steps;
-    // def dockerfile;
     def projectName;
+    def environment;
     def buildNumber;
     def framework;
     def language;
     def build;
+    def version;
+    def port;
+    def runCommand;
 }

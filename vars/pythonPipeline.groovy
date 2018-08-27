@@ -11,6 +11,9 @@ def call(config) {
             stage("Sonar"){
                 sonar(config)
             }
+            stage("Build docker"){
+                dockerBuild(config)
+            }
             break
         case 'celery':
             echo "Building celery"
