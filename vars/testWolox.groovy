@@ -26,22 +26,21 @@ def call() {
             break
     }
 
-    try {
-            def firstImage = sh(
-                script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",
-                returnStdout: true
-            );
-            firstImage = Integer.parseInt(firstImage.trim());
-            println firstImage
-            for(int i = firstImage; i < buildNumber; i++) {
-                try {
-                    sh "docker images --filter 'reference=${projectConfig.projectName}:${i}' -q | xargs --no-run-if-empty docker rmi -f"
-                } catch(ignored) {
-                    println ignored
-                }
-            }
-        } catch(ignored) {
-            println ignored
-            //we don't fail for this exception
-        }
+    // try {
+    //         def firstImage = sh(
+    //             script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",
+    //             returnStdout: true
+    //         );
+    //         firstImage = Integer.parseInt(firstImage.trim());
+    //         println firstImage
+    //         for(int i = firstImage; i < buildNumber; i++) {
+    //             try {
+    //                 sh "docker images --filter 'reference=${projectConfig.projectName}:${i}' -q | xargs --no-run-if-empty docker rmi -f"
+    //             } catch(ignored) {
+    //                 println ignored
+    //             }
+    //         }
+    //     } catch(ignored) {
+    //         println ignored
+    //     }
 }
