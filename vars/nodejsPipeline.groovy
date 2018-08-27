@@ -6,11 +6,13 @@ def call(config) {
     stage("Build"){
         build(config)
     }
-    stage("Sonar"){
-        sonar(config)
-    }
+    // stage("Sonar"){
+    //     sonar(config)
+    // }
     stage("Build docker"){
-        sh "echo ${env.GIT_COMMIT}"
+
+        sh 'echo $GIT_COMMIT'
+
         // Write dockerfile
         writeFile file: 'Dockerfile', text: """FROM node:${config.version}
 WORKDIR /opt/${config.projectName}
