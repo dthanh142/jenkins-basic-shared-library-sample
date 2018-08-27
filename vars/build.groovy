@@ -3,9 +3,9 @@ def call(config) {
     config.build.each { command ->
         try {
             sh command
-        } catch (ignored) {
+        } catch (err) {
 	        currentBuild.result = 'FAILED'
-            println ignored
+	        throw err
         }
     }
 }
