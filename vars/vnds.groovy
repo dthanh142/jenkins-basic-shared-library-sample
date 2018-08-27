@@ -13,7 +13,7 @@ def getTag() {
         println tag
 }
 
-def build(step) {
+def build(String step) {
         echo 'Buidling commit...'
         sh "${step}"
 
