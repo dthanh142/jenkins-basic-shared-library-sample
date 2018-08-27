@@ -84,11 +84,11 @@ class ConfigParser {
     }
 
     static def parsePort(def config) {
-        if (!config || !config["Docker"]["port"]) {
+        if (!config || !config["port"]) {
             return "no port"
         }
 
-        return config["Docker"]["port"]
+        return config["port"]
     }
 
     static def parseRunCommand(def config) {
