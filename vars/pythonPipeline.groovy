@@ -1,6 +1,6 @@
 
 def call(config) {
-    switch(config['template']['framework']) {
+    switch(config.framework) {
         case 'flask':
             echo "Building flask"
             break
