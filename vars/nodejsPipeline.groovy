@@ -10,8 +10,8 @@ def call(config) {
     stage("Build docker"){
 
         // def String command = String.join(",", config.runCommand)
-
-        println config.runCommand.toString()
+        String command = (String) config.runCommand
+        println command
         def command = config.runCommand.toString().split().collect {"\"" +  it.trim() + "\"" }.join(",")
     
         // Write dockerfile
