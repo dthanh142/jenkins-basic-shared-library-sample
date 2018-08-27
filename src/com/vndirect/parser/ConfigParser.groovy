@@ -16,22 +16,22 @@ class ConfigParser {
         projectConfiguration.projectName = parseProjectName(yaml);
 
         // load project framework
-        projectConfiguration.framework = parseFramework(yaml)
+        projectConfiguration.framework = parseFramework(yaml.template.framework)
 
         // load project language
-        projectConfiguration.language = parseLanguage(yaml)
+        projectConfiguration.language = parseLanguage(yaml.template.language)
 
         // load version
-        projectConfiguration.version = parseVersion(yaml.template)
+        projectConfiguration.version = parseVersion(yaml.template.version)
 
         // load project build steps
         projectConfiguration.build = parseBuildSteps(yaml.build)
 
         // load project port
-        projectConfiguration.port = parsePort(yaml.Docker)
+        projectConfiguration.port = parsePort(yaml.Docker.port)
 
         // load run command
-        projectConfiguration.runCommand = parseRunCommand(yaml.Docker)
+        projectConfiguration.runCommand = parseRunCommand(yaml.Docker.runCommand)
 
         return projectConfiguration;
     }
@@ -52,28 +52,28 @@ class ConfigParser {
         return config["projectName"];
     }
 
-    static def parseLanguage(def config) {
-        if (!config || !config["template"]["language"]) {
+    static def parseLanguage(def language) {
+        if (!config) {
             return "vnds-language"
         }
 
-        return config["template"]["language"]
+        return language
     }
 
-    static def parseVersion(def config) {
-        if (!config || !config["version"]) {
-            return "default"
-        }
-        
-        return config["version"]
-    }
-
-    static def parseFramework(def config) {
-        if (!config || !config["template"]["framework"]) {
+    static def parseFramework(def framework) {
+        if (!config) {
             return "vnds-framework"
         }
 
-        return config["template"]["framework"]
+        return framework
+    }
+
+    static def parseVersion(def version) {
+        if (!config) {
+            return "default"
+        }
+        
+        return version
     }
 
     static def parseBuildSteps(def config) {
@@ -83,15 +83,14 @@ class ConfigParser {
         return config.each {"$it"}
     }
 
-    static def parsePort(def config) {
-        if (!config || !config["port"]) {
+    static def parsePort(def port) {
+        if (!config) {
             return "no port"
-        }
+        }s
 
-        return config["port"]
+        return port
     }
 
-    static def parseRunCommand(def config) {
-        return config["runCommand"]
-    }
+    static def parseRunCommand(def runCommand) {
+        return runCommand
 }
