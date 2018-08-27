@@ -11,11 +11,16 @@ def call() {
     
     // echo "${yaml}"
     def yaml = readYaml file: "./devops.yaml";
-    echo "${yaml}"
+    println yaml
     def buildNumber = Integer.parseInt(env.BUILD_ID)
 
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
 
-    print projectConfig.environment
+    def firstImage = sh(
+                script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",
+                returnStdout: true
+            );
+            firstImage = Integer.parseInt(firstImage.trim());
+            println firstImage
 }
