@@ -60,6 +60,6 @@ class ConfigParser {
     }
 
     static def parseBuildSteps(def config) {
-        return config.each {println "$it"}
+        return config.each {"$it"}
     }
 }
