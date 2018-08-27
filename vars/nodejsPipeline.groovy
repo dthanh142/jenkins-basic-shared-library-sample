@@ -11,9 +11,9 @@ def call(config) {
 
         // def String command = String.join(",", config.runCommand)
 
-        // println config.runCommand
+        println config.runCommand.toString()
         def command = config.runCommand.toString().split().collect {"\"" +  it.trim() + "\"" }.join(",")
-
+    
         // Write dockerfile
         writeFile file: 'Dockerfile', text: """FROM node:${config.version}
 WORKDIR /opt/${config.projectName}
