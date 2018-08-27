@@ -5,7 +5,7 @@ def call(config) {
             sh command
         } catch (err) {
 	        currentBuild.result = 'FAILED'
-	        throw err
+            println ignored
         }
     }
 }
