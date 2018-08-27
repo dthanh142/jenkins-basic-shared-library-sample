@@ -8,11 +8,10 @@ def call(config) {
     //     sonar(config)
     // }
     stage("Build docker"){
-
-        // def String command = String.join(",", config.runCommand)
-        String command = (String) config.runCommand
-        println command
-        // def command = config.runCommand.toString().split().collect {"\"" +  it.trim() + "\"" }.join(",")
+      
+        command = config.runCommand.toString()
+        println command.each
+        def command = config.runCommand.toString().split().collect {"\"" +  it.trim() + "\"" }.join(",")
     
         // Write dockerfile
         writeFile file: 'Dockerfile', text: """FROM node:${config.version}
