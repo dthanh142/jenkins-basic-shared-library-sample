@@ -5,7 +5,7 @@ def call(config) {
     switch(config.framework) {
         case 'flask':
             echo "Building flasky"
-            vnds.build(config)
+            build(config)
             // config.build.each{ command ->
             //     vnds.build("${command}")
             // }
