@@ -9,9 +9,9 @@ def call(config) {
     // }
     stage("Build docker"){
       
-        command = config.runCommand.toString()
-        println command.each
-        def command = config.runCommand.toString().split().collect {"\"" +  it.trim() + "\"" }.join(",")
+        // command = config.runCommand.toString()
+        // println command
+        def command = config.runCommand.collect {"\"" +  it.trim() + "\"" }.join(",")
     
         // Write dockerfile
         writeFile file: 'Dockerfile', text: """FROM node:${config.version}
