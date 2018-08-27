@@ -92,8 +92,7 @@ class ConfigParser {
     }
 
     static def parseRunCommand(def config) {
-        return { runCommand ->
-            runCommand = config.runCommand.split(" ")
-        }
+        def command = config.runCommand.split(" ")
+        return command
     }
 }
