@@ -95,7 +95,7 @@ class ConfigParser {
     }
 
     static def parseDependencies(def dependencies){
-        return dependencies.each { "$it" }
+        return dependencies
     }
 
     static def parseRunCommand(def runCommand) {

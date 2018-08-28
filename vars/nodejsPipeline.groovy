@@ -11,15 +11,13 @@ def call(config) {
     stage("Build docker"){
           
         // Write dockerfile
-        config.dependencies.each {
-            writeFile file: 'Dockerfile', text: """FROM node:${config.version}
+        writeFile file: 'Dockerfile', text: """FROM node:${config.version}
 WORKDIR /opt/${config.projectName}
 ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
-RUN npm i -g ${it}
+RUN npm i -g ${config.dependencies}
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
-        }
 
         // dockerBuild(config)
 
