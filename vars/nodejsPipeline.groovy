@@ -22,7 +22,7 @@ CMD [${config.runCommand}]"""
         // dockerBuild(config)
 
     }
-    stage("Deploy to UAT"){
-        deployUAT(config)
-    }
+    // stage("Deploy to UAT"){
+    //     deployUAT(config)
+    // }
 }
