@@ -13,6 +13,10 @@ def call() {
     def yaml = readYaml file: "./devops.yaml";
     println yaml
     def buildNumber = Integer.parseInt(env.BUILD_ID)
+    def gitcommit = Integer.parseInt(env.GIT_COMMIT)
+
+    println buildNumber
+    println gitcommit
 
 
     // load project's configuration
