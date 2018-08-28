@@ -13,9 +13,9 @@ def call() {
     def yaml = readYaml file: "./devops.yaml";
     println yaml
     def buildNumber = Integer.parseInt(env.BUILD_ID)
+    GIT_REVISION = sh( script: 'git rev-parse HEAD', returnStdout: true )
 
-    println buildNumber
-    println env.GIT_COMMIT
+    println GIT_REVISION
 
 
     // load project's configuration
