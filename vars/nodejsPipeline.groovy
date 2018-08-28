@@ -15,7 +15,7 @@ def call(config) {
 WORKDIR /opt/${config.projectName}
 ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
-RUN npm i -g ${config.dependencies.each}
+RUN npm i -g ${config.dependencies}
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
