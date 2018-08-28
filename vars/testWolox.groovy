@@ -19,8 +19,8 @@ def call() {
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildTag);
     
-    println projectConfig.dependencies
-    
+    println projectConfig.dependencies.toString()
+
     switch(projectConfig.language) {
         case 'python':
             pythonPipeline(projectConfig)
