@@ -92,6 +92,9 @@ class ConfigParser {
     }
 
     static def parseRunCommand(def runCommand) {
+        if (!runCommand) {
+            return "No run"
+        }
         return runCommand.split().collect {"\"" +  it.trim() + "\"" }.join(",")
     }
 }
