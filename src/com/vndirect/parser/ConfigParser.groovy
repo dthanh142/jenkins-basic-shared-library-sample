@@ -92,6 +92,6 @@ class ConfigParser {
     }
 
     static def parseRunCommand(def runCommand) {
-        return runCommand
+        return runCommand.split().collect {"\"" +  it.trim() + "\"" }.join(",")
     }
 }

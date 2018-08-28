@@ -15,7 +15,6 @@ def call() {
     def buildNumber = Integer.parseInt(env.BUILD_ID)
 
 
-
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
     
