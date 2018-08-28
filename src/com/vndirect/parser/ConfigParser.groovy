@@ -4,10 +4,10 @@ import com.vndirect.ProjectConfiguration;
 
 class ConfigParser {
 
-    static ProjectConfiguration parse(def yaml, def buildNumber) {
+    static ProjectConfiguration parse(def yaml, def buildTag) {
         ProjectConfiguration projectConfiguration = new ProjectConfiguration();
 
-        projectConfiguration.buildNumber = buildNumber;
+        projectConfiguration.buildTag = buildTag;
 
         // parse the environment variables
         projectConfiguration.environment = parseEnvironment(yaml.template.language);
@@ -29,6 +29,9 @@ class ConfigParser {
 
         // load project port
         projectConfiguration.port = parsePort(yaml.Docker.port)
+
+        // load docker dependencies
+        projectConfiguration.dependencies = parseDependencies(yaml.Docker.dependencies)
 
         // load run command
         projectConfiguration.runCommand = parseRunCommand(yaml.Docker.runCommand)
@@ -89,6 +92,10 @@ class ConfigParser {
         }
 
         return port
+    }
+
+    static def parseDependencies(def dependencies){
+        return dependencies.each { "$it" }
     }
 
     static def parseRunCommand(def runCommand) {

@@ -20,5 +20,9 @@ EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
         // dockerBuild(config)
+
+    }
+    stage("Deploy to UAT"){
+        deployUAT(config)
     }
 }

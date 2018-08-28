@@ -13,13 +13,13 @@ def call() {
     def yaml = readYaml file: "./devops.yaml";
     println yaml
     def buildNumber = Integer.parseInt(env.BUILD_ID)
-    GIT_REVISION = sh( script: 'git rev-parse HEAD', returnStdout: true )
-
-    println GIT_REVISION
+    buildTag = sh( script: 'git rev-parse HEAD', returnStdout: true ).trim()
 
 
     // load project's configuration
-    ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildNumber);
+    ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildTag);
+    
+    println projectConfig.dependencies
     
     switch(projectConfig.language) {
         case 'python':
