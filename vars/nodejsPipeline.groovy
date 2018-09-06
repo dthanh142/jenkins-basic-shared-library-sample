@@ -67,8 +67,7 @@ services:
 
         def composeFile = readYaml file: "docker-compose-default.yml"
         println composeFile
-        println composeFile.services
-        println composeFile
+        println composeFile.services.${config.projectName}
 
         sh "rm docker-compose-default.yml"
         writeYaml file: "docker-compose-default.yml", data: composeFile
