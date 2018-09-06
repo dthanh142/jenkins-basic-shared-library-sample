@@ -31,9 +31,9 @@ def call() {
             break
         default: 
             // println "No framework declared"
+            throw new Exception ("No framework declared")
             break
     }
-    throw new Exception ("No framework declared")
 
     try {
             def firstImage = sh(
