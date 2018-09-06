@@ -30,7 +30,7 @@ def call() {
             nodejsPipeline(projectConfig)
             break
         default: 
-            println "No framework declared"
+            // println "No framework declared"
             break
     }
 
