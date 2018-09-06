@@ -56,15 +56,20 @@ services:
       strategy: recreate
       reinitializing_timeout: 60000
   ${config.projectName}:
-    image: repo.vndirect.com.vn/${config.projectName}/master:latest"""
-    +
-    """volumes:
-      - /opt/config:/opt/config
+    image: repo.vndirect.com.vn/${config.projectName}/master:latest
+    #volumes:
+    #  - /opt/config:/opt/config
     stdin_open: true
     tty: true
     labels:
       io.rancher.container.pull_image: always
     scale: 1"""
+
+        def composeFile = readYaml file docker-compose-default.yml
+        composeFile.${config.projectName}.volumes = [/opt/config:/opt/config]
+
+        sh "rm docker-compose-default.yml"
+        writeYaml file: docker-compose-default.yml, data: composeFile
     }
 
     // stage("Deploy to UAT"){
