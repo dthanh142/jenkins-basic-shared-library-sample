@@ -66,7 +66,7 @@ services:
     scale: 1"""
 
         def composeFile = readYaml file: "docker-compose-default.yml"
-        println composeFile.
+        println composeFile
         println composeFile.services
         println composeFile
 
