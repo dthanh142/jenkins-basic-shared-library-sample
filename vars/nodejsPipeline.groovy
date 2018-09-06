@@ -67,7 +67,7 @@ services:
 
         def composeFile = readYaml file: "docker-compose-default.yml"
         println composeFile
-        composeFile.${config.projectName}.volumes = "/opt/config"
+        println composeFile.${config.projectName}
         println composeFile
 
         sh "rm docker-compose-default.yml"
