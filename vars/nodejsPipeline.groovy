@@ -65,7 +65,7 @@ services:
       io.rancher.container.pull_image: always
     scale: 1"""
 
-        def composeFile = readYaml file "docker-compose-default.yml"
+        def composeFile = readYaml file: "docker-compose-default.yml"
         composeFile.${config.projectName}.volumes = ["/opt/config":"/opt/config"]
 
         sh "rm docker-compose-default.yml"
