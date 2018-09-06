@@ -24,11 +24,8 @@ CMD [${config.runCommand}]"""
     }
 
     stage("Create docker-compose-default file"){
-        agent {
-            label 'docker-slave-uat'
-        }
 
-        writeFile file: "/opt/${config.projectName}/docker-compose-default.yml", text: """version: \'2\'
+        writeFile file: "docker-compose-default.yml", text: """version: \'2\'
 services:
   lb-${config.projectName}:
     image: rancher/lb-service-haproxy:v0.9.1
@@ -59,8 +56,9 @@ services:
       strategy: recreate
       reinitializing_timeout: 60000
   ${config.projectName}:
-    image: repo.vndirect.com.vn/${config.projectName}/master:latest
-    volumes:
+    image: repo.vndirect.com.vn/${config.projectName}/master:latest"""
+    +
+    """volumes:
       - /opt/config:/opt/config
     stdin_open: true
     tty: true
