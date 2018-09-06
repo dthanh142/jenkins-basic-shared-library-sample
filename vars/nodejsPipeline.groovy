@@ -19,11 +19,12 @@ RUN npm i -g ${config.dependencies}
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
-        dockerBuild(config)
+        // dockerBuild(config)
 
     }
 
     stage("Create docker-compose file"){
+
         writeFile file: 'docker-compose.yml', text: """version: \'2\'
 services:
   lb-${config.projectName}:
@@ -64,7 +65,7 @@ services:
       io.rancher.container.pull_image: always
     scale: 1"""
     }
-    
+
     // stage("Deploy to UAT"){
     //     deployUAT(config)
     // }

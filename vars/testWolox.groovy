@@ -19,14 +19,14 @@ def call() {
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildTag);
     
-    switch(projectConfig.language) {
+    switch(projectConfig.language.toLowerCase()) {
         case 'python':
             pythonPipeline(projectConfig)
             break
         case 'java':
             javaPipeline(projectConfig)
             break
-        case 'nodejs':
+        case ['nodejs','node']:
             nodejsPipeline(projectConfig)
             break
         default: 
