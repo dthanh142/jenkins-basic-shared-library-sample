@@ -29,9 +29,9 @@ def call() {
         case ['nodejs','node']:
             nodejsPipeline(projectConfig)
             break
-        // default: 
-        //     println "No framework declared"
-        //     break
+        default: 
+            // println "No framework declared"
+            break
     }
     throw new Exception ("No framework declared")
 
