@@ -57,8 +57,6 @@ services:
       reinitializing_timeout: 60000
   ${config.projectName}:
     image: repo.vndirect.com.vn/${config.projectName}/master:latest
-    #volumes:
-    #  - /opt/config:/opt/config
     stdin_open: true
     tty: true
     labels:
@@ -66,9 +64,13 @@ services:
     scale: 1"""
 
         def composeFile = readYaml file: "docker-compose-default.yml"
-        composeFile.services."${config.projectName}".volumes = ["/opt/config:/opt/config"]
 
-        // sh "rm docker-compose-default.yml"
+        config.Docker.configFiles.each { 
+            composeFile.services."${config.projectName}".volumes = ["$it:$it"]
+        }
+        
+
+        sh "rm docker-compose-default.yml"
         writeYaml file: "docker-compose-default.yml", data: composeFile
     }
 

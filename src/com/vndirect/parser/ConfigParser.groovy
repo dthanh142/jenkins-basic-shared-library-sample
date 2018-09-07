@@ -36,6 +36,9 @@ class ConfigParser {
         // load run command
         projectConfiguration.runCommand = parseRunCommand(yaml.Docker.runCommand)
 
+        // load config files
+        projectConfiguration.configFiles = parseConfigfiles(yaml.Docker.configFiles)
+
         return projectConfiguration;
     }
 
@@ -103,5 +106,9 @@ class ConfigParser {
             return "No run"
         }
         return runCommand.split().collect {"\"" +  it.trim() + "\"" }.join(",")
+    }
+
+    static def parseConfigfiles(def configFiles){
+        return configFiles.each {"$it"}
     }
 }

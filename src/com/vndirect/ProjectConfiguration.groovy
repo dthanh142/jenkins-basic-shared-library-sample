@@ -13,4 +13,5 @@ class ProjectConfiguration {
     def port;
     def dependencies;
     def runCommand;
+    def configFiles;
 }
