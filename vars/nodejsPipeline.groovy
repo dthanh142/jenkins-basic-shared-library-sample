@@ -56,7 +56,7 @@ services:
       strategy: recreate
       reinitializing_timeout: 60000
   ${config.projectName}:
-    image: repo.vndirect.com.vn/${config.projectName}/master:latest
+    image: repo.vndirect.com.vn/${config.projectName}/${config.buildTag}:latest
     stdin_open: true
     tty: true
     labels:
