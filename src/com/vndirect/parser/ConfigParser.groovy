@@ -83,9 +83,9 @@ class ConfigParser {
     }
 
     static def parseBuildSteps(def config) {
-        // if (!config || !config['build']) {
-        //     return "No build"
-        // }
+        if ( !config) {
+            return null
+        }
         return config.each {"$it"}
     }
 
