@@ -66,7 +66,7 @@ services:
         def composeFile = readYaml file: "docker-compose-default.yml"
 
         config.configFiles.each { configFiles ->
-            println $configFiles
+            println configFiles
             composeFile.services."${config.projectName}".volumes = ["$configFiles:$configFiles"]
         }
         
