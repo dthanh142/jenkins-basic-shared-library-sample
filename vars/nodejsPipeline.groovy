@@ -67,7 +67,8 @@ services:
 
         def composeFile = readYaml file: "docker-compose-default.yml"
         println composeFile
-        composeFile.services.volumes = "/opt/config"
+        composeFile.services.test-jenkins.volumes = "/opt/config"
+        println composeFile
 
         sh "rm docker-compose-default.yml"
         writeYaml file: "docker-compose-default.yml", data: composeFile
