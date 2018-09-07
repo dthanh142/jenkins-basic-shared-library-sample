@@ -109,6 +109,9 @@ class ConfigParser {
     }
 
     static def parseConfigfiles(def configFiles){
+        if ( !configFiles) {
+            return false
+        }
         return configFiles
     }
 }
