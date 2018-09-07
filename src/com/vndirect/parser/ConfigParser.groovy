@@ -109,6 +109,6 @@ class ConfigParser {
     }
 
     static def parseConfigfiles(def configFiles){
-        return configFiles.each {"$it"}
+        return configFiles
     }
 }
