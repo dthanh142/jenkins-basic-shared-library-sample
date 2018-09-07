@@ -66,11 +66,9 @@ services:
     scale: 1"""
 
         def composeFile = readYaml file: "docker-compose-default.yml"
-        println composeFile
-        composeFile.services."${config.projectName}".volumes = ["/opt/config:/opt/config","/home:/home"]
-        println composeFile
+        composeFile.services."${config.projectName}".volumes = ["/opt/config:/opt/config"]
 
-        sh "rm docker-compose-default.yml"
+        // sh "rm docker-compose-default.yml"
         writeYaml file: "docker-compose-default.yml", data: composeFile
     }
 
