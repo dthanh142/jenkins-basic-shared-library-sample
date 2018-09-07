@@ -19,7 +19,7 @@ RUN npm i -g ${config.dependencies}
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
-        // dockerBuild(config)
+        dockerBuild(config)
 
     }
 
