@@ -77,7 +77,7 @@ services:
         writeYaml file: "docker-compose-default.yml", data: composeFile
     }
 
-    // stage("Deploy to UAT"){
-    //     deployUAT(config)
-    // }
+    stage("Deploy to UAT"){
+        deployUAT(config)
+    }
 }
