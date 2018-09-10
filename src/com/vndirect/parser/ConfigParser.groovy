@@ -27,6 +27,9 @@ class ConfigParser {
         // load project build steps
         projectConfiguration.build = parseBuildSteps(yaml.build)
 
+        // load dockerfile
+        projectConfiguration.dockerfile = parseDockerfile(yaml.Docker.dockerfile)
+
         // load project port
         projectConfiguration.port = parsePort(yaml.Docker.port)
 
@@ -87,6 +90,14 @@ class ConfigParser {
             return null
         }
         return config.each {"$it"}
+    }
+
+    static def parseDockerfile(def dockerfile) {
+        if (!dockerfile) {
+            return Dockerfile-default
+        }
+
+        return dockerfile
     }
 
     static def parsePort(def port) {
