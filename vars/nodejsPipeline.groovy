@@ -3,7 +3,7 @@ def call(config) {
     echo "Building ${config.language}-${config.version}"
 
     stage("Build"){
-        tool name: 'nodejs6', type: 'nodejs'
+        tool name: "nodejs${config.version}", type: "nodejs"
         build(config)
     }
     // stage("Sonar"){
