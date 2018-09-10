@@ -30,6 +30,9 @@ class ConfigParser {
         // load dockerfile
         projectConfiguration.dockerfile = parseDockerfile(yaml.Docker.dockerfile)
 
+        // load docker-compose
+        projectConfiguration.dockerCompose = parseDockerCompose(yaml.Docker.dockerCompose)
+
         // load project port
         projectConfiguration.port = parsePort(yaml.Docker.port)
 
@@ -98,6 +101,14 @@ class ConfigParser {
         }
 
         return dockerfile
+    }
+
+    static def parseDockerCompose(def dockerCompose) {
+        if (!dockerCompose) {
+            return "docker-compose-default.yml"
+        }
+
+        return dockerCompose
     }
 
     static def parsePort(def port) {

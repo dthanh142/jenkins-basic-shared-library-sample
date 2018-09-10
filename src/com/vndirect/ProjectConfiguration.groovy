@@ -11,6 +11,7 @@ class ProjectConfiguration {
     def build
     def version
     def dockerfile
+    def dockerCompose
     def port
     def dependencies
     def runCommand
