@@ -36,23 +36,23 @@ def call() {
 
     // clean up docker images
     try {
-            sh "docker rmi $(docker images -f \"dangling=true\" -q)"
-            sh "docker images --filter 'reference=repo.vndirect.com.vn/${projectConfig.projectName}/${env.BRANCH_NAME}:${projectConfig.buildTag}' -q | xargs --no-run-if-empty docker rmi -f"
+        sh "docker rmi \$(docker images -f \"dangling=true\" -q)"
+        sh "docker images --filter 'reference=repo.vndirect.com.vn/${projectConfig.projectName}/${env.BRANCH_NAME}:${projectConfig.buildTag}' -q | xargs --no-run-if-empty docker rmi -f"
 
-            // def firstImage = sh(
-            //     script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",
-            //     returnStdout: true
-            // );
-            // firstImage = Integer.parseInt(firstImage.trim());
-            // println firstImage
-            // for(int i = firstImage; i < buildNumber; i++) {
-            //     try {
-            //         sh "docker images --filter 'reference=${projectConfig.projectName}:${i}' -q | xargs --no-run-if-empty docker rmi -f"
-            //     } catch(ignored) {
-            //         println ignored
-            //     }
-            // }
-        } catch(ignored) {
-            println ignored
+        // def firstImage = sh(
+        //     script: "docker images --filter 'reference=${projectConfig.projectName}:*' --format \"{{.Tag}}\" | sort -n | head -1",
+        //     returnStdout: true
+        // );
+        // firstImage = Integer.parseInt(firstImage.trim());
+        // println firstImage
+        // for(int i = firstImage; i < buildNumber; i++) {
+        //     try {
+        //         sh "docker images --filter 'reference=${projectConfig.projectName}:${i}' -q | xargs --no-run-if-empty docker rmi -f"
+        //     } catch(ignored) {
+        //         println ignored
+        //     }
+        // }
+    } catch(ignored) {
+        println ignored
         }
 }
