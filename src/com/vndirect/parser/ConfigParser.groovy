@@ -94,7 +94,7 @@ class ConfigParser {
 
     static def parseDockerfile(def dockerfile) {
         if (!dockerfile) {
-            return Dockerfile-default
+            return "Dockerfile-default"
         }
 
         return dockerfile
