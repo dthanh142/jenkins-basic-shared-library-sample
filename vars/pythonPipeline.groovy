@@ -1,26 +1,33 @@
-import com.vndirect.parser.ConfigParser;
-import com.vndirect.*;
 
 def call(config) {
-    switch(config.framework) {
-        case 'flask':
-            echo "Building flasky"
-            stage("Build"){
-                build(config)
-            }
-            stage("Sonar"){
-                sonar(config)
-            }
-            stage("Build docker"){
-                dockerBuild(config)
-            }
-            break
-        case 'celery':
-            echo "Building celery"
-            break
-        default:
-            echo "Building plain python"
-            break
+    echo "Building ${config.language}-${config.version}"
 
+    stage("Build"){
+        build(config)
+    }
+    // stage("Sonar"){
+    //     sonar(config)
+    // }
+    stage("Build docker"){
+          
+        // Write dockerfile
+        writeFile file: 'Dockerfile', text: """FROM python:${config.version}
+WORKDIR /opt/${config.projectName}
+ADD . /opt/${config.projectName}
+#VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
+RUN pip install -r requirements.txt
+EXPOSE ${config.port}
+CMD [${config.runCommand}]"""
+
+        dockerBuild(config)
+
+    }
+
+    stage("Create docker-compose-default file"){
+        createDockerCompose(config)
+    }
+
+    stage("Deploy to UAT"){
+        deployUAT(config)
     }
 }
