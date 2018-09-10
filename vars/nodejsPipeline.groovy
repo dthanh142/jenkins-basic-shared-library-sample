@@ -3,6 +3,7 @@ def call(config) {
     echo "Building ${config.language}-${config.version}"
 
     stage("Build"){
+        tool name: 'nodejs6', type: 'nodejs'
         build(config)
     }
     // stage("Sonar"){
@@ -22,7 +23,7 @@ CMD [${config.runCommand}]"""
         dockerBuild(config)
     }
 
-    stage("Create docker-compose-default file"){
+    stage("Create docker-compose file"){
         createDockerCompose(config)
     }
 

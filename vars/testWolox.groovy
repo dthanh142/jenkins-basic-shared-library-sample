@@ -9,8 +9,8 @@ def call() {
     // Map configParser = parser.load(new File(pwd() + '/devops.yaml').text)
     // yaml = configParser
     
-    def yaml = readYaml file: "./devops.yaml";
-    println yaml
+    def yaml = readYaml file: "./devops.yaml"
+    
     def buildNumber = Integer.parseInt(env.BUILD_ID)
     buildTag = sh( script: 'git rev-parse HEAD', returnStdout: true ).trim()
 

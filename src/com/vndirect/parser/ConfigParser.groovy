@@ -10,38 +10,27 @@ class ConfigParser {
         projectConfiguration.buildTag = buildTag;
 
         // parse the environment variables
-        projectConfiguration.environment = parseEnvironment(yaml.template.language);
-
+        projectConfiguration.environment = parseEnvironment(yaml.template.language)
         // load the project name
-        projectConfiguration.projectName = parseProjectName(yaml);
-
+        projectConfiguration.projectName = parseProjectName(yaml)
         // load project framework
         projectConfiguration.framework = parseFramework(yaml.template.framework)
-
         // load project language
         projectConfiguration.language = parseLanguage(yaml.template.language)
-
         // load version
         projectConfiguration.version = parseVersion(yaml.template.version)
-
         // load project build steps
         projectConfiguration.build = parseBuildSteps(yaml.build)
-
         // load dockerfile
         projectConfiguration.dockerfile = parseDockerfile(yaml.Docker.dockerfile)
-
         // load docker-compose
         projectConfiguration.dockerCompose = parseDockerCompose(yaml.Docker.dockerCompose)
-
         // load project port
         projectConfiguration.port = parsePort(yaml.Docker.port)
-
         // load docker dependencies
         projectConfiguration.dependencies = parseDependencies(yaml.Docker.dependencies)
-
         // load run command
         projectConfiguration.runCommand = parseRunCommand(yaml.Docker.runCommand)
-
         // load config files
         projectConfiguration.configFiles = parseConfigfiles(yaml.Docker.configFiles)
 

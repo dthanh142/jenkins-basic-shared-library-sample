@@ -11,7 +11,7 @@ def call(config) {
     stage("Build docker"){
           
         // Write dockerfile
-        writeFile file: 'Dockerfile', text: """FROM python:${config.version}
+        writeFile file: 'Dockerfile-default', text: """FROM python:${config.version}
 WORKDIR /opt/${config.projectName}
 ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
@@ -20,10 +20,9 @@ EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
         dockerBuild(config)
-
     }
 
-    stage("Create docker-compose-default file"){
+    stage("Create docker-compose file"){
         createDockerCompose(config)
     }
 
