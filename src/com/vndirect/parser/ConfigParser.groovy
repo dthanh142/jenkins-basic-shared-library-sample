@@ -109,6 +109,10 @@ class ConfigParser {
     }
 
     static def parseDependencies(def dependencies){
+        if (!dependencies) {
+            return null
+        }
+
         return dependencies
     }
 
