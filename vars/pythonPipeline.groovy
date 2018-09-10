@@ -11,7 +11,7 @@ def call(config) {
     stage("Build docker"){
           
         // Write dockerfile
-        writeFile file: 'Dockerfile-default', text: """FROM python:${config.version}
+        writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/python:${config.version}
 WORKDIR /opt/${config.projectName}
 ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
