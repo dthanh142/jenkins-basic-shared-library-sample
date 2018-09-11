@@ -124,7 +124,7 @@ class ConfigParser {
 
     static def parseEnvironmentVariables(def environmentVariables) {
         if ( !environmentVariables) {
-            return ""
+            return "Maintainer Teehee"
         }
 
         // return environmentVariables.collect { k, v -> "${k}=${v}"}
