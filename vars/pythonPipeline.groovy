@@ -21,10 +21,10 @@ EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
         def dockerfile = new File('Dockerfile-default')
-        dockerfile.write("RUN apt-get install net-tools")
+        dockerfile.write "RUN apt-get install net-tools"
         // writeFile file: 'Dockerfile-default', text: dockerfile
 
-        println dockerfile
+        println dockerfile.text
 
 
         dockerBuild(config)
