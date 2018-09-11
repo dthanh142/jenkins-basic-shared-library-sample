@@ -1,5 +1,5 @@
 
 def call(config){
 
-    sh "rancher up -d -s ${config.projectName} --upgrade --confirm-upgrade -f ${config.dockerCompose}"
+    sh "rancher up --pull -d -s ${config.projectName} --upgrade --confirm-upgrade -f ${config.dockerCompose}"
 }
