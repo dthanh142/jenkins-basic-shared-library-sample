@@ -127,6 +127,7 @@ class ConfigParser {
             return ""
         }
 
-        return environmentVariables.collect { k, v -> "${k}=${v}"}
+        // return environmentVariables.collect { k, v -> "${k}=${v}"}
+        return environmentVariables
     }
 }
