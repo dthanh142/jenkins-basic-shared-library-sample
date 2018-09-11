@@ -128,6 +128,6 @@ class ConfigParser {
         }
 
         // return environmentVariables.collect { k, v -> "${k}=${v}"}
-        return environmentVariables
+        return environmentVariables.collect { it.trim() }.join( )
     }
 }
