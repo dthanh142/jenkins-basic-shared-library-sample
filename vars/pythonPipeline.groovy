@@ -20,9 +20,9 @@ RUN pip install -r requirements.txt
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
-        def dockerfile = readFile 'Dockerfile-default'
+        def dockerfile = new File('Dockerfile-default')
         dockerfile.write("RUN apt-get install net-tools")
-        writeFile file: 'Dockerfile-default', text: dockerfile
+        // writeFile file: 'Dockerfile-default', text: dockerfile
 
         println dockerfile
 
