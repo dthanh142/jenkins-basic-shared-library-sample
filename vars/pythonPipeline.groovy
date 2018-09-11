@@ -20,6 +20,9 @@ RUN pip install -r requirements.txt
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
+        def dockerfile = readFile 'Dockerfile-default'
+        println dockerfile
+        
         dockerBuild(config)
     }
 
