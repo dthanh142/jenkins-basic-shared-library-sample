@@ -9,8 +9,6 @@ class ConfigParser {
 
         projectConfiguration.buildTag = buildTag;
 
-        // parse the environment variables
-        projectConfiguration.environment = parseEnvironment(yaml.template.language)
         // load the project name
         projectConfiguration.projectName = parseProjectName(yaml)
         // load project framework
@@ -33,16 +31,10 @@ class ConfigParser {
         projectConfiguration.runCommand = parseRunCommand(yaml.Docker.runCommand)
         // load config files
         projectConfiguration.configFiles = parseConfigfiles(yaml.Docker.configFiles)
+        // load environmentVariables
+        projectConfiguration.environmentVariables = parseEnvironmentVariables(yaml.Docker.env)
 
         return projectConfiguration;
-    }
-
-    static def parseEnvironment(def environment) {
-        if (!environment) {
-            return "";
-        }
-
-        return environment.collect { k, v -> "${k}=${v}"};
     }
 
     static def parseProjectName(def config) {
@@ -128,5 +120,13 @@ class ConfigParser {
             return null
         }
         return configFiles
+    }
+
+    static def parseEnvironmentVariables(def environmentVariables) {
+        if ( !environmentVariables) {
+            return ""
+        }
+
+        return environmentVariables.collect { k, v -> "${k}=${v}"}
     }
 }

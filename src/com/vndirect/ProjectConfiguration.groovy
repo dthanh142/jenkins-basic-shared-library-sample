@@ -4,7 +4,6 @@ import com.vndirect.*;
 
 class ProjectConfiguration {
     def projectName
-    def environment
     def buildTag
     def framework
     def language
@@ -16,4 +15,5 @@ class ProjectConfiguration {
     def dependencies
     def runCommand
     def configFiles
+    def environmentVariables
 }

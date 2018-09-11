@@ -16,7 +16,7 @@ def call() {
 
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildTag);
-    
+    println projectConfig.environmentVariables
     // filter framework
     switch(projectConfig.language.toLowerCase()) {
         case 'python':
