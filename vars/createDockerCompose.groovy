@@ -32,7 +32,7 @@ services:
       strategy: recreate
       reinitializing_timeout: 60000
   ${config.projectName}:
-    image: repo.vndirect.com.vn/${config.projectName}/${env.BRANCH_NAME}:latest
+    image: repo.vndirect.com.vn/${config.projectName}/${env.BRANCH_NAME}:${projectConfig.buildTag}
     stdin_open: true
     tty: true
     labels:
