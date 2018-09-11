@@ -14,6 +14,7 @@ def call(config) {
         // Write dockerfile
         writeFile file: 'Dockerfile-default', text: """FROM node:${config.version}
 WORKDIR /opt/${config.projectName}
+ENV ${config.environmentVariables}
 ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
 RUN npm i -g ${config.dependencies}

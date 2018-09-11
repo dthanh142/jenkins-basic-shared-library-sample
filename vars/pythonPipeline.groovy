@@ -13,6 +13,7 @@ def call(config) {
         // Write dockerfile
         writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/python:${config.version}
 WORKDIR /opt/${config.projectName}
+ENV ${config.environmentVariables}
 ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
 RUN pip install -r requirements.txt
