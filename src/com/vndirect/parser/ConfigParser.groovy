@@ -105,7 +105,7 @@ class ConfigParser {
             return null
         }
 
-        return dependencies
+        return dependencies.collect { it.trim() }.join(" ")
     }
 
     static def parseRunCommand(def runCommand) {
