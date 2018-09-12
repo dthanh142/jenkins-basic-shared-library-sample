@@ -3,7 +3,9 @@ def call(config) {
     echo "Building ${config.language}-${config.version}"
 
     stage("Build"){
-        def nodeVersion = config.version.split(".")[1]
+        def nodeVersion = config.version.getClass()
+        println nodeVersion
+        
         tool name: "nodejs${nodeVersion}", type: "nodejs"
         build(config)
     }
