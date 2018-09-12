@@ -55,7 +55,7 @@ class ConfigParser {
 
     static def parseFramework(def framework) {
         if (!framework) {
-            return "vnds-framework"
+            return null
         }
 
         return framework

@@ -4,6 +4,7 @@ def call(config) {
 
     stage("Build"){
         tool name: "java${config.version}", type: "jdk"
+
         build(config)
     }
     // stage("Sonar"){
@@ -12,12 +13,11 @@ def call(config) {
     stage("Build docker"){
           
         // Write dockerfile
-        writeFile file: 'Dockerfile-default', text: """FROM python:${config.version}
+        writeFile file: 'Dockerfile-default', text: """FROM java:${config.version}
 WORKDIR /opt/${config.projectName}
 ENV ${config.environmentVariables}
-ADD . /opt/${config.projectName}
-#VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
-RUN pip install -r requirements.txt
+COPY target/*.jar /opt/${config.projectName}/${config.projectName}.jar
+#VOLUME ["/var/log/${config.projectName}"]
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
