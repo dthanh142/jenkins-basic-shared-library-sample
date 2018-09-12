@@ -25,7 +25,7 @@ def call() {
         case 'java':
             javaPipeline(projectConfig)
             break
-        case ['nodejs','node']:
+        case ['nodejs','node','react']:
             nodejsPipeline(projectConfig)
             break
         default: 
