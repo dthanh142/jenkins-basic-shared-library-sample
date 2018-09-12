@@ -3,9 +3,9 @@ def call(config) {
     echo "Building ${config.language}-${config.version}"
 
     stage("Build"){
-        def nodeVersion = config.version.getClass()
+        def nodeVersion = config.version.tokenize(".")[0]
         println nodeVersion
-        
+
         tool name: "nodejs${nodeVersion}", type: "nodejs"
         build(config)
     }
