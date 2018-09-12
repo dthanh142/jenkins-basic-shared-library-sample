@@ -63,10 +63,14 @@ class ConfigParser {
 
     static def parseVersion(def version) {
         if (!version) {
-            return "default"
+            return null
         }
-        
-        return version
+        try {
+            version = version.tokenize(".")[0]
+            return version
+        } catch(ignored) {
+            return version
+        }
     }
 
     static def parseBuildSteps(def config) {
