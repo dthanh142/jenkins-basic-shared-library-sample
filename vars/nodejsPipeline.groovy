@@ -17,7 +17,7 @@ WORKDIR /opt/${config.projectName}
 ENV ${config.environmentVariables}
 ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
-RUN npm i -g ${config.dependencies}
+RUN npm i && npm i ${config.dependencies}
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
