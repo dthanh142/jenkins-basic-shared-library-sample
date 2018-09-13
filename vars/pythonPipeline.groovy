@@ -16,7 +16,7 @@ WORKDIR /opt/${config.projectName}
 ENV ${config.environmentVariables}
 ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt && pip install -g ${config.dependencies}
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
 
