@@ -11,11 +11,14 @@ def call() {
     def yaml = readYaml file: "./devops.yaml"
     
     buildTag = sh( script: 'git rev-parse HEAD', returnStdout: true ).trim()
+
     stage("Build prepare"){
         when {
-            buildingTag()
+			buildingTag()
+		}
+        steps{
+            def buildTag = sh( script: 'git describe --tag', returnStdout: true ).trim()
         }
-        def buildTag = sh( script: 'git describe --tag', returnStdout: true ).trim()
     }
 
     // load project's configuration
