@@ -7,7 +7,7 @@ def call() {
     // Yaml parser = new Yaml()
     // Map configParser = parser.load(new File(pwd() + '/devops.yaml').text)
     // yaml = configParser
-    
+    stages{
     def yaml = readYaml file: "./devops.yaml"
     
     buildTag = sh( script: 'git rev-parse HEAD', returnStdout: true ).trim()
@@ -49,5 +49,6 @@ def call() {
         } catch(ignored) {
             println ignored
             }
+    }
     }
 }
