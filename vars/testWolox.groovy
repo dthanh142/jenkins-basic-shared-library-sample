@@ -12,15 +12,6 @@ def call() {
     
     buildTag = sh( script: 'git rev-parse HEAD', returnStdout: true ).trim()
 
-    stage("Build prepare"){
-        when {
-			buildingTag()
-		}
-        steps{
-            def buildTag = sh( script: 'git describe --tag', returnStdout: true ).trim()
-        }
-    }
-
     // load project's configuration
     ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildTag);
     
