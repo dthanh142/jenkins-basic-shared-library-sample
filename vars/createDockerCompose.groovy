@@ -38,8 +38,8 @@ services:
     labels:
       io.rancher.container.pull_image: always
     scale: 1
-    mem_limit: 2g
-    cpu_shares: 2000"""
+    mem_limit: ${config.memLimit}
+    cpu_shares: ${config.cpuLimit}"""
 
         def composeFile = readYaml file: "docker-compose-default.yml"
 

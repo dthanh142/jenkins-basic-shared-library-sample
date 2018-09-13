@@ -9,6 +9,8 @@ class ProjectConfiguration {
     def language
     def build
     def version
+    def memLimit
+    def cpuLimit
     def dockerfile
     def dockerCompose
     def port

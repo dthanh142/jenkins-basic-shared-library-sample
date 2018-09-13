@@ -19,6 +19,10 @@ class ConfigParser {
         projectConfiguration.version = parseVersion(yaml.template.version)
         // load project build steps
         projectConfiguration.build = parseBuildSteps(yaml.build)
+        // load memLimit
+        projectConfiguration.memLimit = parseMemLimit(yaml.Docker.memLimit)
+        // load cpuLimit
+        projectConfiguration.cpuLimit = parseCpuLimit(yaml.Docker.cpuLimit)
         // load dockerfile
         projectConfiguration.dockerfile = parseDockerfile(yaml.Docker.dockerfile)
         // load docker-compose
@@ -78,6 +82,20 @@ class ConfigParser {
             return null
         }
         return config.each {"$it"}
+    }
+
+    static def parseMemLimit(def memLimit) {
+        if ( !memLimit) {
+            return "2g"
+        }
+        return memLimit
+    }
+
+    static def parseCpuLimit(def cpuLimit) {
+        if ( !cpuLimit) {
+            return "2000"
+        }
+        return cpuLimit
     }
 
     static def parseDockerfile(def dockerfile) {
