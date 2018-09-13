@@ -37,7 +37,9 @@ services:
     tty: true
     labels:
       io.rancher.container.pull_image: always
-    scale: 1"""
+    scale: 1
+    mem_limit: 2g
+    cpu_shares: 2000"""
 
         def composeFile = readYaml file: "docker-compose-default.yml"
 
