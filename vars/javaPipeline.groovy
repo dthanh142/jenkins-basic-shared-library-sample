@@ -13,7 +13,7 @@ def call(config) {
     stage("Build docker"){
           
         // Write dockerfile
-        writeFile file: 'Dockerfile-default', text: """FROM java:${config.version}
+        writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/java:${config.version}
 WORKDIR /opt/${config.projectName}
 ENV ${config.environmentVariables}
 COPY target/*.jar /opt/${config.projectName}/${config.projectName}.jar

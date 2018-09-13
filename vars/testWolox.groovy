@@ -10,7 +10,6 @@ def call() {
     
     def yaml = readYaml file: "./devops.yaml"
 
-    def buildNumber = Integer.parseInt(env.BUILD_ID)
     buildTag = sh( script: 'git rev-parse HEAD', returnStdout: true ).trim()
 
 
@@ -33,7 +32,7 @@ def call() {
             break
     }
 
-    // clean up docker images
+    // clean up work dir
     stage("Clean up") {
         deleteDir()
         try {
