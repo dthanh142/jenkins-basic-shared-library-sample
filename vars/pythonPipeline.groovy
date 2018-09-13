@@ -3,9 +3,7 @@ def call(config) {
     echo "Building ${config.language}-${config.version}"
 
     stage("Build"){
-        steps{
-            build(config)
-        }
+        build(config)
     }
     // stage("Sonar"){
     //     sonar(config)
