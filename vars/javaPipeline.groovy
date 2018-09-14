@@ -16,9 +16,9 @@ def call(config) {
 
         if ( config.buildTool.contains("maven")) {
             println "maven"
-            def jarfileLocation = "target"
+            jarfileLocation = "target"
         } else if ( config.buildTool.contains("gradle")) {
-            def jarfileLocation = "target/libs"
+            jarfileLocation = "target/libs"
         }
 
         println jarfileLocation
