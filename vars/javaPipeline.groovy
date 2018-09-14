@@ -1,3 +1,4 @@
+import java.util.regex.*
 
 def call(config) {
     echo "Building ${config.language}-${config.version}"
@@ -12,12 +13,15 @@ def call(config) {
     //     sonar(config)
     // }
     stage("Build docker"){
-        
-        if ( config.buildTool =~"maven") {
+
+        if ( config.buildTool.contains("maven")) {
             def jarfileLocation = "target"
-        } else if ( config.buildTool =~"gradle") {
+        } else if ( config.buildTool.contains("gradle") {
             def jarfileLocation = "target/libs"
         }
+
+        println jarfileLocation
+        
         // Write dockerfile
         writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/java:${config.version}
 WORKDIR /opt/${config.projectName}
