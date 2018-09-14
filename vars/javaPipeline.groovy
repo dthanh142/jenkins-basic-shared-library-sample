@@ -16,12 +16,12 @@ def call(config) {
 
         if ( config.buildTool.contains("maven")) {
             def jarfileLocation = "target"
-        } else if ( config.buildTool.contains("gradle") {
+        } else if ( config.buildTool.contains("gradle")) {
             def jarfileLocation = "target/libs"
         }
 
         println jarfileLocation
-        
+
         // Write dockerfile
         writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/java:${config.version}
 WORKDIR /opt/${config.projectName}
