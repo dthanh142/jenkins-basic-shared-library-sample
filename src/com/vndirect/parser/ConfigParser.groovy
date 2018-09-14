@@ -58,7 +58,7 @@ class ConfigParser {
     }
 
     static def parseBuildTool(def buildTool) {
-        if (!framework) {
+        if (!buildTool) {
             return null
         }
 
