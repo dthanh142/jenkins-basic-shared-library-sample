@@ -12,7 +12,7 @@ class ConfigParser {
         // load the project name
         projectConfiguration.projectName = parseProjectName(yaml)
         // load project framework
-        projectConfiguration.framework = parseFramework(yaml.template.framework)
+        projectConfiguration.buildTool = parseBuildTool(yaml.template.buildTool)
         // load project language
         projectConfiguration.language = parseLanguage(yaml.template.language)
         // load version
@@ -57,12 +57,12 @@ class ConfigParser {
         return language
     }
 
-    static def parseFramework(def framework) {
+    static def parseBuildTool(def buildTool) {
         if (!framework) {
             return null
         }
 
-        return framework
+        return buildTool
     }
 
     static def parseVersion(def version) {

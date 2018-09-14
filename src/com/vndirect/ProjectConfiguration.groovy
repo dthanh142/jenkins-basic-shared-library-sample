@@ -5,7 +5,7 @@ import com.vndirect.*;
 class ProjectConfiguration {
     def projectName
     def buildTag
-    def framework
+    def buildTool
     def language
     def build
     def version

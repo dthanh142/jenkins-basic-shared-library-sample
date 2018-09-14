@@ -49,7 +49,6 @@ services:
             }
             composeFile.services."${config.projectName}".volumes.add("$it:$it")
         }
-        
 
         sh "rm docker-compose-default.yml"
         writeYaml file: "docker-compose-default.yml", data: composeFile

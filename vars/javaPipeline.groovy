@@ -4,6 +4,7 @@ def call(config) {
 
     stage("Build"){
         tool name: "java${config.version}", type: "jdk"
+        tool name: "${config.buildTool}", type: "${config.buildTool}"
 
         build(config)
     }
@@ -11,12 +12,17 @@ def call(config) {
     //     sonar(config)
     // }
     stage("Build docker"){
-          
+        
+        if ( config.buildTool =~"maven") {
+            def jarfileLocation = "target"
+        } else if ( config.buildTool =~"gradle") {
+            def jarfileLocation = "target/libs"
+        }
         // Write dockerfile
         writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/java:${config.version}
 WORKDIR /opt/${config.projectName}
 ENV ${config.environmentVariables}
-COPY target/*.jar /opt/${config.projectName}/${config.projectName}.jar
+COPY ${jarfileLocation}/*.jar /opt/${config.projectName}/${config.projectName}.jar
 #VOLUME ["/var/log/${config.projectName}"]
 EXPOSE ${config.port}
 CMD [${config.runCommand}]"""
