@@ -15,6 +15,7 @@ def call(config) {
     stage("Build docker"){
 
         if ( config.buildTool.contains("maven")) {
+            println "maven"
             def jarfileLocation = "target"
         } else if ( config.buildTool.contains("gradle")) {
             def jarfileLocation = "target/libs"
