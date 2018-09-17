@@ -7,7 +7,7 @@ def call(config) {
 
         env.buildToolVersion = tool name: "nodejs${config.version}", type: "nodejs"
         env.PATH="${env.buildToolVersion}/bin:${env.PATH}"
-        sh "${buildToolVersion}/bin/node -v"
+        sh "node -v"
 
         build(config)
     }
