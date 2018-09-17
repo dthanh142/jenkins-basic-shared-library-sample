@@ -6,6 +6,7 @@ def call(config) {
         // def nodeVersion = config.version.tokenize(".")[0]
 
         tool name: "nodejs${config.version}", type: "nodejs"
+        sh "node -v"
         build(config)
     }
     // stage("Sonar"){
