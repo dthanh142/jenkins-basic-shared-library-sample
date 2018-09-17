@@ -5,7 +5,9 @@ def call(config) {
     stage("Build"){
         // def nodeVersion = config.version.tokenize(".")[0]
 
-        tool name: "nodejs${config.version}", type: "nodejs"
+        tools {
+            nodejs "nodejs${config.version}"
+        }
         sh "node -v"
         build(config)
     }
