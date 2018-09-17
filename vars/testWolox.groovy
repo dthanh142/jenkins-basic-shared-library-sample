@@ -33,7 +33,7 @@ def call() {
 
     // clean up work dir
     stage("Clean up") {
-        deleteDir()
+        // deleteDir()
         try {
             sh "docker images --filter 'reference=repo.vndirect.com.vn/${projectConfig.projectName}/${env.BRANCH_NAME}:${projectConfig.buildTag}' -q | xargs --no-run-if-empty docker rmi -f"
             sh "docker rmi \$(docker images -f \"dangling=true\" -q) &> /dev/null || true &> /dev/null"
