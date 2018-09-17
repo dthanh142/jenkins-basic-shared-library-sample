@@ -1,6 +1,6 @@
 
 def call(config) {
-    echo "Building ${config.language}-${config.version}"
+    echo "Building ${config.language}"
 
     stage("Build"){
         // def nodeVersion = config.version.tokenize(".")[0]
