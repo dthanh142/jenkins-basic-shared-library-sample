@@ -5,7 +5,8 @@ def call(config) {
 
     stage("Build"){
         tool name: "java${config.version}", type: "jdk"
-        tool name: "${config.buildTool}", type: "${config.buildTool}"
+        env.buildToolVersion = tool name: "${config.buildTool}", type: "${config.buildTool}"
+        env.PATH="${env.buildToolVersion}/bin:${env.PATH}"
 
         build(config)
     }
