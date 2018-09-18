@@ -1,50 +1,44 @@
-import org.yaml.snakeyaml.Yaml
+import com.vndirect.parser.ConfigParser
+import com.vndirect.*
+
 
 def call() {
+    // echo 'Loading pipeline definition'
+    // Yaml parser = new Yaml()
+    // Map configParser = parser.load(new File(pwd() + '/devops.yaml').text)
+    // yaml = configParser
 
-    node {
-		options {
-	    	buildDiscarder(logRotator(numToKeepStr: '5'))
-  		}
+    def yaml = readYaml file: "./devops.yaml"
+    
+    buildTag = sh( script: 'git rev-parse HEAD', returnStdout: true ).trim()
 
-	    try {
-            stage('Clone') {
-	        	checkout scm
-	        }
-            stage('Parse config file') {
-      		    echo 'Loading pipeline definition'
-		        Yaml parser = new Yaml()
-		        Map configParser = parser.load(new File(pwd() + '/devops.yaml').text)
-		        cp = configParser
-		        echo "${cp}"
-    	    }
-            // stage('Approval') {
-            //     approval(cp.name)
-            // }
-			stage('Build') {
-				echo "Building commit..."
-				switch(cp.template.language) {
-					case 'python':
-						echo "Building python"
-						python(cp.template.framework)
-						break
-					case 'java':
-						echo "Building java"
-						break
-					case 'nodejs':
-						echo "Building nodejs project..."
-						java(cp.template.framework)
-						break
-					default:
-						echo "zip"
-						break
-				}
-			}
+    // load project's configuration
+    ProjectConfiguration projectConfig = ConfigParser.parse(yaml, buildTag);
+    
+    // filter framework
+    switch(projectConfig.language.toLowerCase()) {
+        case 'python':
+            pythonPipeline(projectConfig)
+            break
+        case 'java':
+            javaPipeline(projectConfig)
+            break
+        case ['nodejs','node','react']:
+            nodejsPipeline(projectConfig)
+            break
+        default: 
+            throw new Exception ("No framework declared")
+            break
+    }
 
-	    } catch (err) {
-	        currentBuild.result = 'FAILED'
-	        throw err
-	    }
+    // clean up work dir
+    stage("Clean up") {
+        // deleteDir()
+        try {
+            sh "docker images --filter 'reference=repo.vndirect.com.vn/${projectConfig.projectName}/${env.BRANCH_NAME}:${projectConfig.buildTag}' -q | xargs --no-run-if-empty docker rmi -f"
+            sh "docker rmi \$(docker images -f \"dangling=true\" -q) &> /dev/null || true &> /dev/null"
+        } catch(ignored) {
+            println ignored
+            }
     }
 }
-
