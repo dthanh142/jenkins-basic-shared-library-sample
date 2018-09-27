@@ -1,4 +1,3 @@
-import java.util.regex.*
 
 def call(config) {
     echo "Building ${config.language}-${config.version}"
