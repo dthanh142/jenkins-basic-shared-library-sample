@@ -3,6 +3,7 @@ package com.vndirect;
 import com.vndirect.*;
 
 class ProjectConfiguration {
+    def environment
     def projectName
     def buildTag
     def buildTool

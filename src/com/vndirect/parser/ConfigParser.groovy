@@ -9,7 +9,9 @@ class ConfigParser {
 
         projectConfiguration.buildTag = buildTag;
 
-        // load the project name
+        // load project environment
+        projectConfiguration.environment = parseEnvironment(yaml.environment)
+        // load project name
         projectConfiguration.projectName = parseProjectName(yaml)
         // load project framework
         projectConfiguration.buildTool = parseBuildTool(yaml.template.buildTool)
@@ -39,6 +41,13 @@ class ConfigParser {
         projectConfiguration.environmentVariables = parseEnvironmentVariables(yaml.Docker.env)
 
         return projectConfiguration;
+    }
+
+    static def parseEnvironment(def environment) {
+        if (!environment) {
+            return "UAT"
+        }
+        return environment
     }
 
     static def parseProjectName(def config) {
