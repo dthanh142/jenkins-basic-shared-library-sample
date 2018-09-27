@@ -19,7 +19,7 @@ def call(config) {
     stage("Build docker"){
           
         // Write dockerfile
-        writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vb/base-images/nodejs:${config.version}
+        writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/nodejs:${config.version}
 WORKDIR /opt/${config.projectName}
 ENV ${config.environmentVariables}
 ADD . /opt/${config.projectName}
