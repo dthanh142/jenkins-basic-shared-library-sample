@@ -1,0 +1,32 @@
+environment: UAT2
+template:
+  language: nodejs 
+  version: 6
+  framework: nodejs
+  
+projectName: protrade
+approval: true
+
+# OPTIONAL: list of build commands to execute before add to docker container
+build:
+  - npm install
+  - npm run clean
+  - npm run build
+  
+# Build docker image based on this properties
+Docker:
+  #application port to exposed
+  port: 9000
+  #Start command, mandatory
+  runCommand: pushstate-server build 9000
+  
+  # OPTIONAL: provide custom dockerfile or docker-compose file within the source code. If not declared, it will be the standard default dockerfile from jenkins
+  #dockerfile: ./Dockerfile
+  #dockerCompose: ./docker-compose.yml
+  #OPTIONAL: project dependencies
+  dependencies: 
+    - pushstate-server 
+    #- forever
+  #OPTIONAL: list of config folder
+  #configFiles:
+  #  - /opt/config
