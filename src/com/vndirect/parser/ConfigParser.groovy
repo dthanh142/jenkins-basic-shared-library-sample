@@ -68,7 +68,7 @@ class ConfigParser {
 
     static def parseCelery(def celery) {
         if (!celery) {
-            return False
+            return false
         }
         return celery
     }
