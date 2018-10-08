@@ -43,15 +43,23 @@ services:
     mem_limit: ${config.memLimit}
     cpu_shares: ${config.cpuLimit}"""
 
-        def composeFile = readYaml file: "docker-compose-default.yml"
+        
+    def composeFile = readYaml file: "docker-compose-default.yml"
 
-        config.configFiles.each {
-            if ( !composeFile.services."${config.projectName}".volumes){
-                composeFile.services."${config.projectName}".volumes = []
-            }
-            composeFile.services."${config.projectName}".volumes.add("$it:$it")
+    // add config volumes
+    config.configFiles.each {
+        if ( !composeFile.services."${config.projectName}".volumes){
+            composeFile.services."${config.projectName}".volumes = []
         }
+        composeFile.services."${config.projectName}".volumes.add("$it:$it")
+    }
+    
+    if ( config.celery == True) {
+        composeFile.service."${config.projectName}".depends_on.add("redis")
+        composeFile.service."${config.projectName}".command.add("${config.runCommand}")
+    }
 
-        sh "rm docker-compose-default.yml"
-        writeYaml file: "docker-compose-default.yml", data: composeFile
+
+    sh "rm docker-compose-default.yml"
+    writeYaml file: "docker-compose-default.yml", data: composeFile
 }

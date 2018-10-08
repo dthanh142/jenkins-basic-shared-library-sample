@@ -8,6 +8,7 @@ class ProjectConfiguration {
     def buildTag
     def buildTool
     def language
+    def celery
     def build
     def version
     def memLimit

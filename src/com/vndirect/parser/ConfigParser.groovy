@@ -17,6 +17,8 @@ class ConfigParser {
         projectConfiguration.buildTool = parseBuildTool(yaml.template.buildTool)
         // load project language
         projectConfiguration.language = parseLanguage(yaml.template.language)
+        // parse celery option
+        projectConfiguration.celery = parseCelery(yaml.template.celery)
         // load version
         projectConfiguration.version = parseVersion(yaml.template.version)
         // load project build steps
@@ -54,7 +56,6 @@ class ConfigParser {
         if (!config || !config["projectName"]) {
             return "woloxci-project";
         }
-
         return config["projectName"];
     }
 
@@ -62,15 +63,20 @@ class ConfigParser {
         if (!language) {
             return "vnds-language"
         }
-
         return language
+    }
+
+    static def parseCelery(def celery) {
+        if (!celery) {
+            return False
+        }
+        return celery
     }
 
     static def parseBuildTool(def buildTool) {
         if (!buildTool) {
             return null
         }
-
         return buildTool
     }
 
@@ -111,7 +117,6 @@ class ConfigParser {
         if (!dockerfile) {
             return "Dockerfile-default"
         }
-
         return dockerfile
     }
 
@@ -119,7 +124,6 @@ class ConfigParser {
         if (!dockerCompose) {
             return "docker-compose-default.yml"
         }
-
         return dockerCompose
     }
 
@@ -127,7 +131,6 @@ class ConfigParser {
         if (!port) {
             return "no port"
         }
-
         return port
     }
 
@@ -135,7 +138,6 @@ class ConfigParser {
         if (!dependencies) {
             return null
         }
-
         return dependencies.collect { it.trim() }.join(" ")
     }
 
@@ -143,7 +145,8 @@ class ConfigParser {
         if (!runCommand) {
             return "No run"
         }
-        return runCommand.split().collect {"\"" +  it.trim() + "\"" }.join(",")
+        // return runCommand.split().collect {"\"" +  it.trim() + "\"" }.join(",")
+        return runCommand
     }
 
     static def parseConfigfiles(def configFiles){
@@ -157,8 +160,6 @@ class ConfigParser {
         if ( !environmentVariables) {
             return "Maintainer Teehee"
         }
-
-        // return environmentVariables.collect { k, v -> "${k}=${v}"}
         return environmentVariables.collect { it.trim() }.join(" ")
     }
 }
