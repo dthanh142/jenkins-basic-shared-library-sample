@@ -76,7 +76,10 @@ class ConfigParser {
     }
 
     static def parseStartCelery(def config) {
-        if (!config.startCelery) {
+        if (!config) {
+            return null
+        }
+        if (config && !config.startCelery) {
             return "celery worker -A admin.celery --loglevel=info --autoscale=10,4"
         }
         return config.startCelery
