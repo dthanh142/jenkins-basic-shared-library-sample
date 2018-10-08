@@ -9,7 +9,7 @@ def call(config) {
     //     sonar(config)
     // }
     stage("Build docker"){
-          
+        def runCommand = config.runCommand.split().collect {"\"" +  it.trim() + "\"" }.join(",")
         // Write dockerfile
         writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/python:${config.version}
 WORKDIR /opt/${config.projectName}
@@ -18,7 +18,7 @@ ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
 RUN pip install -r requirements.txt && pip install ${config.dependencies}
 EXPOSE ${config.port}
-CMD ["${config.runCommand}".split().collect {"\"" +  it.trim() + "\"" }.join(",")]"""
+CMD [${runCommand}]"""
 
 
         dockerBuild(config)
