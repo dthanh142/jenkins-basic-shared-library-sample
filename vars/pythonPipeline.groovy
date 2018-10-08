@@ -18,7 +18,7 @@ ADD . /opt/${config.projectName}
 #VOLUME ["/var/log/${config.projectName}","/opt/${config.projectName}"]
 RUN pip install -r requirements.txt && pip install ${config.dependencies}
 EXPOSE ${config.port}
-CMD [${config.runCommand}.split().collect {"\"" +  it.trim() + "\"" }.join(",")]"""
+CMD ["${config.runCommand}".split().collect {"\"" +  it.trim() + "\"" }.join(",")]"""
 
 
         dockerBuild(config)
