@@ -19,6 +19,7 @@ def call(config) {
         } else if ( config.buildTool.contains("gradle")) {
             jarfileLocation = "target/libs"
         }
+        def runCommand = config.runCommand.split().collect {"\"" +  it.trim() + "\"" }.join(",")
 
         // Write dockerfile
         writeFile file: 'Dockerfile-default', text: """FROM repo.vndirect.com.vn/base-images/java:${config.version}
@@ -27,7 +28,7 @@ ENV ${config.environmentVariables}
 COPY ${jarfileLocation}/*.jar /opt/${config.projectName}/${config.projectName}.jar
 #VOLUME ["/var/log/${config.projectName}"]
 EXPOSE ${config.port}
-CMD [${config.runCommand}]"""
+CMD [${runCommand}]"""
 
         dockerBuild(config)
     }

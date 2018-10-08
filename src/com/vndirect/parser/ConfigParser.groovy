@@ -19,6 +19,8 @@ class ConfigParser {
         projectConfiguration.language = parseLanguage(yaml.template.language)
         // parse celery option
         projectConfiguration.celery = parseCelery(yaml.template.celery)
+        // parse start celery command
+        projectConfiguration.startCelery = parseStartCelery(yaml.template.celery.startCelery)
         // load version
         projectConfiguration.version = parseVersion(yaml.template.version)
         // load project build steps
@@ -71,6 +73,13 @@ class ConfigParser {
             return false
         }
         return celery
+    }
+
+    static def parseStartCelery(def startCelery) {
+        if (!startCelery) {
+            return "celery worker -A admin.celery --loglevel=info --autoscale=10,4"
+        }
+        return startCelery
     }
 
     static def parseBuildTool(def buildTool) {
