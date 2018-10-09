@@ -59,13 +59,13 @@ services:
         composeFile.services."${config.projectName}"["command"] = "${config.runCommand}"
 
         def celery_redis = {
-          celery:
-            image: repo.vndirect.com.vn/${config.projectName}/${env.BRANCH_NAME}:${config.buildTag}
-            command: ${config.startCelery}
-            depends_on:
-              - redis
-          redis:
-            image: redis
+          "celery":
+            "image": "repo.vndirect.com.vn/${config.projectName}/${env.BRANCH_NAME}:${config.buildTag}"
+            "command": "${config.startCelery}"
+            "depends_on":
+              - "redis"
+          "redis":
+            "image": "redis"
         }
 
         composeFile.services.add(celery_redis)
