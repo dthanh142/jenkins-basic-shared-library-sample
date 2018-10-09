@@ -55,7 +55,6 @@ services:
     }
     
     if ( config.celery ) {
-        print "celery =true"
         composeFile.services."${config.projectName}"["depends_on"] = "redis"
         composeFile.services."${config.projectName}"["command"] = "${config.runCommand}"
 
@@ -69,7 +68,7 @@ services:
             image: redis
         }"""
 
-        composeFile.services.add(celery_redis)
+        composeFile.services.add("$celery_redis")
     }
 
 
