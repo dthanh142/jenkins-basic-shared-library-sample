@@ -54,7 +54,7 @@ services:
         composeFile.services."${config.projectName}".volumes.add("$it:$it")
     }
     
-    if ( config.celery == true) {
+    if ( config.celery ) {
         composeFile.service."${config.projectName}".depends_on.add("redis")
         composeFile.service."${config.projectName}".command.add("${config.runCommand}")
 
@@ -68,7 +68,7 @@ services:
             image: redis
         }"""
 
-        // composeFile.service.add(celery_redis)
+        composeFile.service.add(celery_redis)
     }
 
 
