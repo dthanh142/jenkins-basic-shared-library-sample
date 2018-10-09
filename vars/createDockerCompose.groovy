@@ -45,7 +45,7 @@ services:
 
         
     def composeFile = readYaml file: "docker-compose-default.yml"
-    print typeof(composeFile)
+    print composeFile.getClass()
     // add config volumes
     config.configFiles.each {
         if ( !composeFile.services."${config.projectName}".volumes){
@@ -67,7 +67,7 @@ services:
           redis:
             image: redis
         }
-        print typeof(celery_redis)
+        print celery_redis.getClass()
         composeFile.services.add(celery_redis)
     }
 
