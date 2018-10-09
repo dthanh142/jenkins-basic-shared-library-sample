@@ -55,8 +55,8 @@ services:
     }
     
     if ( config.celery ) {
-        composeFile.services."${config.projectName}".depends_on.add("redis")
-        composeFile.services."${config.projectName}".command.add("${config.runCommand}")
+        composeFile.services."${config.projectName}"["depends_on"] = "redis"
+        composeFile.services."${config.projectName}"["command"] = "${config.runCommand}"
 
         def celery_redis = """{
           celery:
