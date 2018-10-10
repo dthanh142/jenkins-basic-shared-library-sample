@@ -72,7 +72,7 @@ services:
         ]
 
         print celery_redis.getClass()
-        composeFile.services.putAll(celery_redis)
+        composeFile.services << celery_redis
     }
 
 
