@@ -45,7 +45,7 @@ services:
 
         
     def composeFile = readYaml file: "docker-compose-default.yml"
-    print composeFile.getClass()
+
     // add config volumes
     config.configFiles.each {
         if ( !composeFile.services."${config.projectName}".volumes){
@@ -54,9 +54,12 @@ services:
         composeFile.services."${config.projectName}".volumes.add("$it:$it")
     }
     
+    // add celery container for python-celery task queue
+    if (config.language.toLowerCase() == 'python') {
+      composeFile.services."${config.projectName}"["command"] = "${config.runCommand}"
+    }
     if ( config.celery ) {
         composeFile.services."${config.projectName}"["depends_on"] = ["redis"]
-        composeFile.services."${config.projectName}"["command"] = "${config.runCommand}"
 
         def celery_redis = [
           "celery": [
@@ -71,7 +74,6 @@ services:
           ]
         ]
 
-        print celery_redis.getClass()
         composeFile.services << celery_redis
     }
 
