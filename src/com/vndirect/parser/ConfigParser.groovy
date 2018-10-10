@@ -113,14 +113,14 @@ class ConfigParser {
 
     static def parseMemLimit(def memLimit) {
         if ( !memLimit) {
-            return "2g"
+            return "1g"
         }
         return memLimit
     }
 
     static def parseCpuLimit(def cpuLimit) {
         if ( !cpuLimit) {
-            return "2000"
+            return "1000"
         }
         return cpuLimit
     }

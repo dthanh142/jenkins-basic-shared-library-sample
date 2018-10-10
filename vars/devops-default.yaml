@@ -1,15 +1,17 @@
-environment: UAT2
+environment: UAT2  # default to UAT
 template:
   language: python
   version: 2
-  framework: flask
+  # OPTIONAL
+  # framework: flask
+  # buildTool: maven (or gradle)
   celery: True
     startCelery: celery worker -A celery_worker.celery --loglevel=info --autoscale=10,4
   
 projectName: finfo
 #approval: true
 
-# OPTIONAL: list of build commands to execute before add to docker container
+# OPTIONAL: list of build commands to execute before added to docker container
 build:
   - npm install
   - npm run clean
@@ -18,17 +20,19 @@ build:
 # Build docker image based on this properties
 Docker:
   #application port to exposed
-  port: 8080
-  #Start command, mandatory
-  runCommand: pushstate-server build 9000
+  port: 5001
+  #Start command
+  runCommand: gunicorn -w 4 stockbook:app --worker-class=gevent --bind=0.0.0.0:5000
   
   # OPTIONAL: provide custom dockerfile or docker-compose file within the source code. If not declared, it will be the standard default dockerfile from jenkins
   #dockerfile: ./Dockerfile
   #dockerCompose: ./docker-compose.yml
-  #OPTIONAL: project dependencies
+  #memLimit: 1g
+  #cpuLimit: 1000
+  #OPTIONAL: list of project dependencies
   dependencies: 
-    - pushstate-server 
-    #- forever
+    - gunicorn
+    
   #OPTIONAL: list of config folder
   #configFiles:
   #  - /opt/config
