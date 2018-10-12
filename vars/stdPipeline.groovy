@@ -33,6 +33,8 @@ def call() {
 
     // clean up work dir
     stage("Clean up") {
+        def env.BRANCH_NAME = env.BRANCH_NAME.toLowerCase()
+
         // deleteDir()
         try {
             sh "docker images --filter 'reference=repo.vndirect.com.vn/${projectConfig.projectName}/${env.BRANCH_NAME}:${projectConfig.buildTag}' -q | xargs --no-run-if-empty docker rmi -f"

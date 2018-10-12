@@ -1,6 +1,7 @@
 
 def call(config){
-    
+
+    def env.BRANCH_NAME = env.BRANCH_NAME.toLowerCase()
     writeFile file: "docker-compose-default.yml", text: """version: \'2\'
 services:
   lb-${config.projectName}:
