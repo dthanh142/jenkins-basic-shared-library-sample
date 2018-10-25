@@ -33,6 +33,9 @@ def call() {
 
     // create dns record for domain name
     stage("Create domain name") {
+        // sh "python /opt/google-dns-create.py ${projectConfig.projectName}-${projectConfig.environment.toLowerCase()}.vndirect.com.vn. 10.200.39.30"
+        def google_dns_create = libraryResource '../resources/google-dns-create.py' 
+        writeFile file: 'google-dns-create.py', text: google_dns_create
         sh "python /opt/google-dns-create.py ${projectConfig.projectName}-${projectConfig.environment.toLowerCase()}.vndirect.com.vn. 10.200.39.30"
     }
 
