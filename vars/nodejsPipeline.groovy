@@ -38,4 +38,8 @@ CMD [${runCommand}]"""
     stage("Deploy to UAT"){
         deployUAT(config)
     }
+
+    stage("Run python script") {
+        sh 'python /opt/test.py'
+    }
 }
