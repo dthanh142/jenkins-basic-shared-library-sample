@@ -1,7 +1,7 @@
 
 def call(config){
 
-    def env.BRANCH_NAME = env.BRANCH_NAME.toLowerCase()
+    def BRANCH_NAME = env.BRANCH_NAME.toLowerCase()
     writeFile file: "docker-compose-default.yml", text: """version: \'2\'
 services:
   lb-${config.projectName}:
@@ -33,7 +33,7 @@ services:
       strategy: recreate
       reinitializing_timeout: 60000
   ${config.projectName}:
-    image: repo.vndirect.com.vn/${config.projectName}/${env.BRANCH_NAME}:${config.buildTag}
+    image: repo.vndirect.com.vn/${config.projectName}/${BRANCH_NAME}:${config.buildTag}
     environment:
       TZ: Asia/Ho_Chi_Minh
     stdin_open: true
@@ -64,7 +64,7 @@ services:
 
         def celery_redis = [
           "celery": [
-            "image": "repo.vndirect.com.vn/${config.projectName}/${env.BRANCH_NAME}:${config.buildTag}",
+            "image": "repo.vndirect.com.vn/${config.projectName}/${BRANCH_NAME}:${config.buildTag}",
             "command": "${config.startCelery}",
             "depends_on": [
                "redis"
