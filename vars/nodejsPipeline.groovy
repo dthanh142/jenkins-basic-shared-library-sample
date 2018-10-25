@@ -39,7 +39,4 @@ CMD [${runCommand}]"""
         deployUAT(config)
     }
 
-    stage("Run python script") {
-        sh 'python /opt/test.py'
-    }
 }

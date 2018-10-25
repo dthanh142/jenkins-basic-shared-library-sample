@@ -43,4 +43,9 @@ def call() {
             println ignored
             }
     }
+
+    // create dns record for domain name
+    stage("Create domain name") {
+        sh "python google-dns-create.py ${projectConfig.projectName}-${projectConfig.environment}.vndirect.com.vn. 10.200.39.30"
+    }
 }
