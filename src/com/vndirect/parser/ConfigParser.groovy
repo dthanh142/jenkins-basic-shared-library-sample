@@ -49,9 +49,9 @@ class ConfigParser {
 
     static def parseEnvironment(def environment) {
         if (!environment) {
-            return "UAT"
+            return "uat"
         }
-        return environment
+        return environment.toLowerCase()
     }
 
     static def parseProjectName(def config) {

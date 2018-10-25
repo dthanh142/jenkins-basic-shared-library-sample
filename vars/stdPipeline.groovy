@@ -31,6 +31,11 @@ def call() {
             break
     }
 
+    // create dns record for domain name
+    stage("Create domain name") {
+        sh "python /opt/google-dns-create.py ${projectConfig.projectName}-${projectConfig.environment.toLowerCase()}.vndirect.com.vn. 10.200.39.30"
+    }
+
     // clean up work dir
     stage("Clean up") {
         def BRANCH_NAME = env.BRANCH_NAME.toLowerCase()
@@ -44,8 +49,4 @@ def call() {
             }
     }
 
-    // create dns record for domain name
-    stage("Create domain name") {
-        sh "python /opt/google-dns-create.py ${projectConfig.projectName}-${projectConfig.environment}.vndirect.com.vn. 10.200.39.30"
-    }
 }
